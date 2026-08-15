@@ -1,1097 +1,2910 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Santa del Arte | San Arte - Experiencias mediante arte, ciencia y filosofía">
-<title>Santa del Arte | San Arte</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root {
---deep-forest: #1a2c1a;
---moss-green: #3a5a3a;
---sage: #8da98d;
---clay: #c7794a;
---ivory: #f8f5f0;
---charcoal: #2a2d3a;
---gold: #d4af37;
---cream: #e8d8c5;
---shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.03);
---shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.08);
---shadow-deep: 0 25px 50px rgba(0, 0, 0, 0.15);
---shadow-sage: 0 0 25px rgba(141, 169, 141, 0.25);
---ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
---ease-in-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
---transition-base: all 0.5s var(--ease-in-out-expo);
---transition-fast: all 0.3s var(--ease-in-out-quad);
---space-2xs: 0.25rem;
---space-xs: 0.5rem;
---space-sm: 1rem;
---space-md: 1.5rem;
---space-lg: 2rem;
---space-xl: 3rem;
---space-2xl: 4rem;
---space-3xl: 6rem;
---text-xs: 0.75rem;
---text-sm: 0.875rem;
---text-base: 1rem;
---text-lg: 1.125rem;
---text-xl: 1.25rem;
---text-2xl: 1.5rem;
---text-3xl: 1.875rem;
---text-4xl: 2.25rem;
---text-5xl: 3rem;
---text-6xl: 4rem;
---text-7xl: 5rem;
---text-8xl: 6rem;
---border-radius-sm: 8px;
---border-radius-md: 16px;
---border-radius-lg: 24px;
---border-radius-xl: 32px;
---border-radius-full: 9999px;
---z-index-base: 1;
---z-index-nav: 100;
---z-index-modal: 500;
---z-index-overlay: 900;
---z-index-loader: 1000;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 100%; }
-body {
-font-family: 'Inter', 'Segoe UI', sans-serif;
-color: var(--charcoal);
-background-color: var(--ivory);
-line-height: 1.6;
-overflow-x: hidden;
-position: relative;
-}
-body::before {
-content: '';
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background:
-radial-gradient(circle at 10% 20%, rgba(26, 44, 26, 0.03) 0%, transparent 40%),
-radial-gradient(circle at 90% 80%, rgba(58, 90, 58, 0.03) 0%, transparent 40%);
-z-index: -2;
-}
-.brand-stamp {
-position: absolute;
-opacity: 0.02;
-z-index: -1;
-font-family: 'Syne', sans-serif;
-font-weight: 800;
-letter-spacing: 0.1em;
-white-space: nowrap;
-text-transform: uppercase;
-}
-.stamp-1 { top: 15%; right: 5%; font-size: 8vw; transform: rotate(15deg); color: var(--moss-green); }
-.stamp-2 { bottom: 20%; left: 8%; font-size: 7vw; transform: rotate(-10deg); color: var(--clay); }
-.container { width: min(95%, 1600px); margin: 0 auto; padding: 0 var(--space-sm); }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Entre el icosaedro y el cuasicristal o de la kinesfera a la kinegea</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
-.navbar {
-position: fixed;
-top: 0; left: 0; right: 0;
-padding: var(--space-md) 0;
-z-index: var(--z-index-nav);
-transition: var(--transition-fast);
-backdrop-filter: blur(12px);
-background: rgba(248, 245, 240, 0.92);
-}
-.navbar.scrolled {
-padding: var(--space-sm) 0;
-background: rgba(248, 245, 240, 0.98);
-box-shadow: var(--shadow-soft);
-backdrop-filter: blur(8px);
-border-bottom: 1px solid var(--sage);
-}
-.nav-container {
-display: flex;
-justify-content: space-between;
-align-items: center;
-max-width: 1600px;
-margin: 0 auto;
-padding: 0 var(--space-md);
-}
-.brand-logo {
-display: flex;
-align-items: center;
-gap: var(--space-xs);
-text-decoration: none;
-font-family: 'Syne', sans-serif;
-font-weight: 700;
-font-size: 1.75rem;
-color: var(--deep-forest);
-transition: var(--transition-fast);
-position: relative;
-z-index: 101;
-}
-.brand-logo span {
-position: absolute;
-bottom: -18px;
-left: 50%;
-transform: translateX(-50%);
-font-size: 0.75rem;
-color: var(--moss-green);
-font-weight: 500;
-opacity: 0.9;
-text-transform: lowercase;
-letter-spacing: 1px;
-white-space: nowrap;
-}
-.brand-logo:hover { color: var(--gold); }
-.brand-icon { font-size: 2rem; color: var(--moss-green); }
-.nav-links { display: flex; gap: var(--space-lg); }
-.nav-link {
-text-decoration: none;
-color: var(--deep-forest);
-font-family: 'Syne', sans-serif;
-font-weight: 600;
-font-size: var(--text-lg);
-position: relative;
-padding: var(--space-2xs) 0;
-transition: var(--transition-fast);
-}
-.nav-link::after {
-content: '';
-position: absolute;
-bottom: 0; left: 0;
-width: 0; height: 2px;
-background: var(--gold);
-transition: var(--transition-fast);
-}
-.nav-link:hover, .nav-link.active { color: var(--moss-green); }
-.nav-link:hover::after, .nav-link.active::after { width: 100%; }
-.mobile-menu-btn {
-display: none;
-background: none;
-border: none;
-font-size: 1.5rem;
-color: var(--deep-forest);
-cursor: pointer;
-z-index: 101;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-.hero {
-min-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-position: relative;
-overflow: hidden;
-padding: 0;
-}
-.hero::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: linear-gradient(135deg, var(--deep-forest) 0%, #2a442a 100%);
-z-index: -1;
-}
-.hero-content {
-max-width: 1200px;
-margin: 0 auto;
-padding: var(--space-3xl) var(--space-md);
-text-align: center;
-position: relative;
-z-index: 2;
-width: 90%;
-}
-.rebirth-badge {
-display: inline-block;
-background: rgba(141, 169, 141, 0.15);
-backdrop-filter: blur(8px);
-color: var(--gold);
-padding: var(--space-xs) var(--space-md);
-border-radius: var(--border-radius-full);
-font-family: 'Syne', sans-serif;
-font-weight: 700;
-font-size: var(--text-lg);
-letter-spacing: 1px;
-margin-bottom: var(--space-lg);
-border: 1px solid rgba(141, 169, 141, 0.3);
-animation: pulse 3s infinite;
-}
-@keyframes pulse {
-0% { box-shadow: 0 0 0 0 rgba(141, 169, 141, 0.4); }
-70% { box-shadow: 0 0 0 12px rgba(141, 169, 141, 0); }
-100% { box-shadow: 0 0 0 0 rgba(141, 169, 141, 0); }
-}
-.hero-title {
-font-family: 'Syne', sans-serif;
-font-size: var(--text-8xl);
-font-weight: 800;
-margin-bottom: var(--space-xs);
-line-height: 0.9;
-text-transform: uppercase;
-letter-spacing: -0.03em;
-text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-background: linear-gradient(to right, var(--gold), var(--clay));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-}
-.hero-subtitle {
-font-family: 'Inter', sans-serif;
-font-size: var(--text-3xl);
-font-weight: 300;
-color: rgba(248, 245, 240, 0.85);
-margin-bottom: var(--space-xl);
-max-width: 800px;
-margin-left: auto; margin-right: auto;
-line-height: 1.4;
-}
-.hero-text {
-font-size: var(--text-xl);
-color: rgba(248, 245, 240, 0.75);
-margin-bottom: var(--space-2xl);
-max-width: 800px;
-margin-left: auto; margin-right: auto;
-line-height: 1.7;
-}
-.cta-container { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; }
+        body { 
+            overflow: hidden; 
+            font-family: 'Inter', sans-serif; 
+            background-color: #050508;
+            color: white;
+            touch-action: none;
+        }
 
-.btn {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: var(--space-xs);
-padding: var(--space-md) var(--space-xl);
-border-radius: var(--border-radius-full);
-text-decoration: none;
-font-family: 'Syne', sans-serif;
-font-weight: 700;
-font-size: var(--text-lg);
-letter-spacing: 0.5px;
-transition: var(--transition-base);
-border: none;
-cursor: pointer;
-position: relative;
-overflow: hidden;
-text-align: center;
-z-index: 1;
-}
-.btn::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: linear-gradient(45deg, var(--gold), var(--clay));
-z-index: -1;
-transition: var(--transition-base);
-}
-.btn-primary {
-background: transparent;
-color: var(--deep-forest);
-box-shadow: 0 4px 20px rgba(141, 169, 141, 0.3);
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(141, 169, 141, 0.5); }
-.btn-primary:hover::before { opacity: 1; }
-.btn-secondary {
-background: rgba(255, 255, 255, 0.15);
-color: var(--ivory);
-border: 1px solid rgba(255, 255, 255, 0.3);
-}
-.btn-secondary:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-3px); }
-.btn:active { transform: translateY(1px); }
-.btn i { font-size: 1.1em; }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
 
-.section { padding: var(--space-3xl) 0; position: relative; }
-.section-header { text-align: center; max-width: 800px; margin: 0 auto var(--space-2xl); }
-.section-title {
-font-family: 'Syne', sans-serif;
-font-size: var(--text-5xl);
-font-weight: 800;
-margin-bottom: var(--space-xs);
-text-transform: uppercase;
-letter-spacing: -0.02em;
-background: linear-gradient(to right, var(--clay), var(--gold));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-}
-.section-subtitle {
-font-family: 'Inter', sans-serif;
-font-size: var(--text-2xl);
-font-weight: 300;
-color: var(--moss-green);
-margin-top: var(--space-sm);
-line-height: 1.5;
-}
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-.pvu-section { background: var(--ivory); position: relative; overflow: hidden; }
-.pvu-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl); align-items: center; }
-.pvu-content {
-background: var(--ivory);
-backdrop-filter: blur(12px);
-border-radius: var(--border-radius-xl);
-padding: var(--space-2xl);
-box-shadow: var(--shadow-medium);
-border: 1px solid rgba(141, 169, 141, 0.1);
-position: relative;
-overflow: hidden;
-transition: var(--transition-base);
-}
-.pvu-content:hover { transform: translateY(-10px); box-shadow: var(--shadow-deep); }
-.pvu-content::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 5px;
-background: linear-gradient(90deg, var(--gold), var(--clay));
-}
-.pvu-icon { font-size: 3.5rem; color: var(--moss-green); margin-bottom: var(--space-md); display: flex; justify-content: center; }
-.pvu-title { font-family: 'Syne', sans-serif; font-size: var(--text-3xl); font-weight: 700; color: var(--deep-forest); margin-bottom: var(--space-sm); text-align: center; }
-.pvu-text { font-size: var(--text-lg); line-height: 1.8; color: var(--charcoal); margin-bottom: var(--space-lg); text-align: center; }
-.differentiators { display: flex; flex-wrap: wrap; gap: var(--space-sm); justify-content: center; }
-.differentiator {
-background: var(--sage); color: white;
-padding: var(--space-2xs) var(--space-md);
-border-radius: var(--border-radius-full);
-font-family: 'Syne', sans-serif;
-font-weight: 600;
-font-size: var(--text-sm);
-}
+        .header {
+            text-align: left;
+            pointer-events: auto;
+        }
 
-.tabs-section { background: linear-gradient(to bottom, var(--ivory), var(--cream)); position: relative; }
-.tabs-wrapper { max-width: 1000px; margin: 0 auto; }
-.tab-nav { display: flex; justify-content: center; gap: var(--space-sm); margin-bottom: var(--space-xl); flex-wrap: wrap; }
-.tab-btn {
-background: transparent;
-border: 2px solid var(--sage);
-color: var(--deep-forest);
-padding: var(--space-sm) var(--space-xl);
-border-radius: var(--border-radius-full);
-font-family: 'Syne', sans-serif;
-font-weight: 700;
-font-size: var(--text-lg);
-cursor: pointer;
-transition: var(--transition-base);
-position: relative;
-overflow: hidden;
-}
-.tab-btn::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: var(--deep-forest);
-z-index: -1;
-transform: scaleX(0);
-transform-origin: right;
-transition: transform 0.4s var(--ease-in-out-expo);
-}
-.tab-btn:hover { border-color: var(--deep-forest); color: var(--ivory); }
-.tab-btn:hover::before { transform: scaleX(1); transform-origin: left; }
-.tab-btn.active { background: var(--deep-forest); color: var(--gold); border-color: var(--deep-forest); box-shadow: var(--shadow-medium); }
-.tab-btn.active::before { transform: scaleX(1); }
-.tab-content-wrapper { position: relative; min-height: 400px; }
-.tab-pane {
-display: none;
-opacity: 0;
-transform: translateY(20px);
-background: var(--ivory);
-border-radius: var(--border-radius-xl);
-padding: var(--space-2xl);
-box-shadow: var(--shadow-medium);
-border: 1px solid rgba(141, 169, 141, 0.15);
-}
-.tab-pane.active {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: var(--space-xl);
-align-items: center;
-opacity: 1;
-transform: translateY(0);
-animation: fadeInTab 0.6s var(--ease-in-out-expo) forwards;
-}
-@keyframes fadeInTab {
-from { opacity: 0; transform: translateY(20px); }
-to { opacity: 1; transform: translateY(0); }
-}
-.tab-pane-header { text-align: left; }
-.tab-pane-icon { font-size: 4rem; color: var(--clay); margin-bottom: var(--space-md); }
-.tab-pane-title { font-family: 'Syne', sans-serif; font-size: var(--text-4xl); font-weight: 800; color: var(--deep-forest); margin-bottom: var(--space-xs); }
-.tab-pane-subtitle { font-family: 'Inter', sans-serif; font-size: var(--text-xl); color: var(--moss-green); font-style: italic; margin-bottom: var(--space-lg); }
-.tab-pane-text { font-size: var(--text-base); color: var(--charcoal); line-height: 1.8; margin-bottom: var(--space-lg); }
-.tab-services-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-sm); }
-.tab-services-list li { display: flex; align-items: center; gap: var(--space-sm); font-size: var(--text-lg); color: var(--deep-forest); font-weight: 500; }
-.tab-services-list li i { color: var(--gold); font-size: 1.2rem; }
-.tab-pane-visual {
-display: flex;
-align-items: center;
-justify-content: center;
-background: linear-gradient(135deg, rgba(58, 90, 58, 0.05), rgba(199, 121, 74, 0.05));
-border-radius: var(--border-radius-lg);
-padding: var(--space-xl);
-min-height: 300px;
-position: relative;
-overflow: hidden;
-}
-.tab-pane-visual i { font-size: 8rem; color: var(--sage); opacity: 0.3; transition: var(--transition-base); }
-.tab-pane.active .tab-pane-visual i { opacity: 0.6; transform: scale(1.1); }
+        h1 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            line-height: 1.3;
+        }
 
-.business-model { background: linear-gradient(to bottom, var(--cream), var(--ivory)); position: relative; overflow: hidden; }
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-2xl); }
-.tier-card {
-background: var(--ivory);
-border-radius: var(--border-radius-xl);
-padding: var(--space-2xl);
-text-align: center;
-box-shadow: var(--shadow-medium);
-border: 1px solid rgba(141, 169, 141, 0.1);
-transition: var(--transition-base);
-position: relative;
-overflow: hidden;
-}
-.tier-card::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 5px;
-background: linear-gradient(90deg, var(--gold), var(--moss-green));
-}
-.tier-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-deep); }
-.tier-name { font-family: 'Syne', sans-serif; font-size: var(--text-3xl); margin-bottom: var(--space-sm); color: var(--deep-forest); }
-.tier-premium .tier-name { color: var(--gold); }
-.tier-accessible .tier-name { color: var(--sage); }
-.tier-freemium .tier-name { color: var(--moss-green); }
-.tier-description { font-size: var(--text-xl); color: var(--charcoal); margin-bottom: var(--space-lg); font-style: italic; }
-.tier-features { list-style: none; margin: var(--space-lg) 0; text-align: left; }
-.tier-features li { padding: var(--space-sm) 0; border-bottom: 1px solid var(--sage); display: flex; gap: var(--space-sm); }
-.tier-features li:last-child { border-bottom: none; }
-.tier-features li::before { content: '✓'; color: var(--moss-green); font-weight: bold; min-width: 1.5rem; }
+        p.subtitle {
+            font-size: 0.65rem;
+            color: #8899a6;
+            margin-top: 3px;
+        }
 
-.contact-section { background: var(--ivory); padding: var(--space-3xl) 0 var(--space-xl); }
-.contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-2xl); margin-top: var(--space-xl); }
-.contact-card {
-background: var(--ivory);
-border-radius: var(--border-radius-xl);
-padding: var(--space-2xl);
-box-shadow: var(--shadow-medium);
-border: 1px solid rgba(141, 169, 141, 0.1);
-transition: var(--transition-base);
-}
-.contact-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-deep); border-color: rgba(58, 90, 58, 0.3); }
-.contact-title { font-family: 'Syne', sans-serif; font-size: var(--text-3xl); font-weight: 700; color: var(--deep-forest); margin-bottom: var(--space-lg); text-align: center; }
-.contact-info { text-align: center; }
-.contact-email {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: var(--space-sm);
-font-family: 'Syne', sans-serif;
-font-size: var(--text-xl);
-font-weight: 600;
-color: var(--moss-green);
-text-decoration: none;
-padding: var(--space-md);
-border-radius: var(--border-radius-lg);
-transition: var(--transition-fast);
-margin: var(--space-lg) 0;
-border: 1px solid rgba(58, 90, 58, 0.2);
-}
-.contact-email:hover { background: rgba(58, 90, 58, 0.05); transform: scale(1.03); }
-.social-links { display: flex; justify-content: center; gap: var(--space-md); margin-top: var(--space-xl); flex-wrap: wrap; }
-.social-link {
-width: 60px; height: 60px;
-border-radius: var(--border-radius-full);
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.5rem;
-text-decoration: none;
-transition: var(--transition-base);
-background: var(--cream);
-color: var(--deep-forest);
-box-shadow: var(--shadow-soft);
-}
-.social-link:hover { transform: translateY(-8px) scale(1.1); background: var(--moss-green); color: white; box-shadow: var(--shadow-sage); }
-.form-group { margin-bottom: var(--space-lg); }
-.form-label { display: block; margin-bottom: var(--space-2xs); font-family: 'Syne', sans-serif; font-weight: 600; color: var(--deep-forest); font-size: var(--text-lg); }
-.form-control {
-width: 100%;
-padding: var(--space-md);
-border: 2px solid var(--sage);
-border-radius: var(--border-radius-lg);
-font-family: 'Inter', sans-serif;
-font-size: var(--text-lg);
-transition: var(--transition-fast);
-background: var(--ivory);
-}
-.form-control:focus { outline: none; border-color: var(--moss-green); box-shadow: 0 0 0 3px rgba(58, 90, 58, 0.2); }
-textarea.form-control { min-height: 200px; resize: vertical; }
-.form-message { padding: var(--space-sm); margin-bottom: var(--space-md); font-size: var(--text-sm); border-radius: var(--border-radius-md); display: none; }
-.form-message.success-message { background: rgba(58, 90, 58, 0.1); color: var(--deep-forest); border: 1px solid var(--moss-green); }
-.form-message.error-message { background: rgba(199, 121, 74, 0.1); color: var(--clay); border: 1px solid var(--clay); }
+        #legend {
+            background: rgba(20, 20, 25, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            pointer-events: auto;
+            min-width: 140px;
+            max-height: 40vh;
+            overflow-y: auto;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), overflow 0.3s;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            user-select: none;
+        }
 
-.cta-section {
-background: linear-gradient(135deg, var(--deep-forest), var(--moss-green));
-color: white;
-text-align: center;
-padding: var(--space-3xl) 0;
-position: relative;
-overflow: hidden;
-}
-.cta-section::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background:
-radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 80%),
-radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.05) 0%, transparent 80%);
-z-index: -1;
-}
-.cta-content { max-width: 800px; margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
-.cta-title { font-family: 'Syne', sans-serif; font-size: var(--text-5xl); margin-bottom: var(--space-md); color: white; line-height: 1.3; }
-.cta-text { font-size: var(--text-2xl); margin-bottom: var(--space-2xl); line-height: 1.8; color: rgba(255, 255, 255, 0.9); font-weight: 300; font-style: italic; }
+        #legend:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
 
-footer { background: var(--deep-forest); color: rgba(255, 255, 255, 0.85); text-align: center; padding: var(--space-2xl) 0; font-family: 'Inter', sans-serif; font-size: var(--text-lg); }
-.footer-content { max-width: 800px; margin: 0 auto; padding: 0 var(--space-md); }
-.footer-logo { font-family: 'Syne', sans-serif; font-size: var(--text-2xl); font-weight: 700; color: var(--gold); margin-bottom: var(--space-md); display: block; text-decoration: none; }
-.copyright { margin-top: var(--space-sm); opacity: 0.7; font-size: var(--text-base); }
+        #legend.collapsed {
+            max-height: 32px;
+            overflow: hidden;
+        }
 
-.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-.fade-in.appear { opacity: 1; transform: translateY(0); }
-@keyframes rebirthFade { 0% { opacity: 0; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }
+        #legend.dragging {
+            transition: none;
+        }
 
-.loader {
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: var(--deep-forest);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-z-index: var(--z-index-loader);
-transition: opacity 1s ease;
-}
-.loader-content { text-align: center; max-width: 90%; }
-.loader-icon { font-size: 4rem; color: var(--gold); margin-bottom: var(--space-lg); animation: spin 2s linear infinite; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.loader-text { font-family: 'Syne', sans-serif; font-size: var(--text-3xl); font-weight: 800; color: var(--ivory); text-transform: uppercase; letter-spacing: 3px; margin-bottom: var(--space-sm); }
-.loader-subtext { font-family: 'Inter', sans-serif; font-size: var(--text-lg); color: rgba(248, 245, 240, 0.8); font-weight: 300; letter-spacing: 1px; }
-.loader-progress { width: 300px; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: var(--border-radius-full); margin-top: var(--space-xl); overflow: hidden; }
-.progress-bar { height: 100%; width: 0%; background: var(--gold); border-radius: var(--border-radius-full); transition: width 0.4s ease; }
+        .legend-title {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
 
-@media (max-width: 768px) {
-:root {
---text-8xl: 4rem; --text-7xl: 3.5rem; --text-6xl: 3rem;
---text-5xl: 2.5rem; --text-4xl: 2rem; --text-3xl: 1.75rem;
---text-2xl: 1.5rem;
---space-3xl: 4rem; --space-2xl: 3rem; --space-xl: 2rem; --space-lg: 1.5rem;
-}
-.mobile-menu-btn { display: block; }
-.nav-links {
-display: none;
-position: fixed;
-top: 70px; left: 0; right: 0;
-background: var(--ivory);
-padding: var(--space-xl) 0;
-flex-direction: column;
-gap: var(--space-lg);
-align-items: center;
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-z-index: var(--z-index-modal);
-}
-.nav-links.active { display: flex; }
-.hero-title { font-size: var(--text-6xl); }
-.hero-subtitle { font-size: var(--text-2xl); }
-.section-title { font-size: var(--text-4xl); }
-.cta-container { flex-direction: column; align-items: center; }
-.btn { width: 100%; max-width: 350px; }
-.contact-container { grid-template-columns: 1fr; }
-.tab-pane.active { grid-template-columns: 1fr; }
-.tab-pane-visual { min-height: 200px; order: -1; }
-.tab-nav { gap: var(--space-xs); }
-.tab-btn { padding: var(--space-xs) var(--space-md); font-size: var(--text-base); }
-.brand-logo span { bottom: -15px; font-size: 0.7rem; }
-}
-@media (max-width: 480px) {
-:root {
---text-8xl: 3.5rem; --text-7xl: 3rem; --text-6xl: 2.5rem;
---text-5xl: 2rem; --text-4xl: 1.75rem;
---space-md: 1rem; --space-lg: 1.25rem; --space-xl: 1.5rem;
---space-2xl: 2rem; --space-3xl: 3rem;
-}
-.hero-content { padding: var(--space-xl) var(--space-sm); }
-.hero-title { font-size: var(--text-5xl); line-height: 1; }
-.section-title { font-size: var(--text-3xl); }
-.rebirth-badge { font-size: var(--text-base); padding: var(--space-2xs) var(--space-md); }
-.brand-logo span { display: none; }
-.contact-card { padding: var(--space-lg) !important; }
-}
-</style>
+        .legend-title::after {
+            content: '▼';
+            font-size: 0.45rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        #legend.collapsed .legend-title::after {
+            transform: rotate(-90deg);
+        }
+
+        .legend-section {
+            margin-bottom: 8px;
+        }
+
+        .legend-section-title {
+            font-size: 0.48rem;
+            color: #888;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 0.6rem;
+            color: #ddd;
+        }
+
+        .legend-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .color-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+            box-shadow: 0 0 3px currentColor;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .legend-item.plane {
+            font-size: 0.55rem;
+        }
+
+        /* Control Panel */
+        #control-panel {
+            background: rgba(20, 20, 25, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            pointer-events: auto;
+            min-width: 220px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 100;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), overflow 0.3s;
+            user-select: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        #control-panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        #control-panel.collapsed {
+            max-height: 38px;
+            overflow: hidden;
+        }
+
+        #control-panel.dragging {
+            transition: none;
+        }
+
+        .control-title {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .control-title::after {
+            content: '▼';
+            font-size: 0.5rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        #control-panel.collapsed .control-title::after {
+            transform: rotate(-90deg);
+        }
+
+        .control-section {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .control-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .control-section-title {
+            font-size: 0.42rem;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            gap: 4px;
+        }
+
+        .control-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 5px;
+            color: #ddd;
+            font-size: 0.55rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            flex: 1;
+            pointer-events: auto;
+            min-height: 26px;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
+        }
+
+        .control-btn.active {
+            background: rgba(77, 158, 255, 0.25);
+            border-color: rgba(77, 158, 255, 0.6);
+            color: #4d9eff;
+        }
+
+        .btn-icon {
+            margin-right: 2px;
+            font-size: 0.65rem;
+        }
+
+        .scale-controls {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+        }
+
+        .scale-btn {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            color: #aaa;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            pointer-events: auto;
+            min-height: 20px;
+        }
+
+        .scale-btn:hover {
+            background: rgba(77, 158, 255, 0.2);
+            border-color: rgba(77, 158, 255, 0.5);
+            color: #4d9eff;
+        }
+
+        .scale-btn:active {
+            transform: scale(0.9);
+        }
+
+        .scale-value {
+            min-width: 36px;
+            text-align: center;
+            font-size: 0.48rem;
+            color: #888;
+            background: rgba(0,0,0,0.3);
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        .label-text {
+            font-size: 0.5rem;
+            color: #ccc;
+            flex: 1;
+        }
+
+        /* Velocity Control */
+        .velocity-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .velocity-label {
+            font-size: 0.5rem;
+            color: #ccc;
+            min-width: 50px;
+        }
+        .velocity-slider-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .velocity-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            outline: none;
+        }
+        .velocity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #4d9eff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .velocity-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #4d9eff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        .velocity-value {
+            font-size: 0.45rem;
+            color: #4d9eff;
+            min-width: 32px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Kinesis panel */
+        .kinesis-selector {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+        .kinesis-selector .control-btn {
+            flex: 1;
+            font-size: 0.45rem;
+            padding: 4px 2px;
+        }
+        .kinesis-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            margin-top: 5px;
+        }
+        .kinesis-dir-btn {
+            background: rgba(100, 100, 150, 0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            color: #ccc;
+            font-size: 0.45rem;
+            padding: 6px 2px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s ease;
+        }
+        .kinesis-dir-btn:hover {
+            background: rgba(77, 158, 255, 0.3);
+            border-color: rgba(77, 158, 255, 0.6);
+            color: white;
+        }
+        .kinesis-dir-btn.selected {
+            background: #4d9eff;
+            color: white;
+            border-color: #4d9eff;
+        }
+
+        /* Cinesis (rot) styles */
+        .cinesis-figure-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            padding: 6px;
+            margin-bottom: 6px;
+        }
+        .cinesis-figure-title {
+            font-size: 0.48rem;
+            color: #aaa;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .cinesis-axis-row {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-bottom: 3px;
+        }
+        .cinesis-axis-label {
+            font-size: 0.45rem;
+            color: #888;
+            min-width: 12px;
+            text-align: center;
+        }
+        .cinesis-axis-label.rot { color: #ff6b6b; }
+        .cinesis-slider-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .cinesis-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            outline: none;
+        }
+        .cinesis-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            background: #4d9eff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .cinesis-slider::-moz-range-thumb {
+            width: 10px;
+            height: 10px;
+            background: #4d9eff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        .cinesis-value {
+            font-size: 0.4rem;
+            color: #666;
+            min-width: 28px;
+            text-align: right;
+        }
+
+        #loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050508;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: opacity 0.5s;
+        }
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border-top-color: #4d9eff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Scrollbar */
+        #control-panel::-webkit-scrollbar,
+        #legend::-webkit-scrollbar {
+            width: 3px;
+        }
+        #control-panel::-webkit-scrollbar-track,
+        #legend::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 2px;
+        }
+        #control-panel::-webkit-scrollbar-thumb,
+        #legend::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            #control-panel {
+                min-width: 200px;
+                max-height: 70vh;
+            }
+            
+            #legend {
+                max-width: 150px;
+            }
+            
+            h1 {
+                font-size: 0.85rem;
+            }
+
+            .control-btn {
+                padding: 4px 5px;
+                font-size: 0.5rem;
+                min-height: 24px;
+            }
+
+            .btn-icon {
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (max-height: 500px) {
+            #control-panel {
+                max-height: 70vh;
+            }
+            
+            #legend {
+                max-height: 25vh;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 400px) {
+            #control-panel {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                min-width: 190px;
+                padding: 6px;
+            }
+
+            #legend {
+                position: absolute;
+                bottom: 8px;
+                left: 8px;
+                min-width: 130px;
+                padding: 6px;
+            }
+
+            h1 {
+                font-size: 0.8rem;
+            }
+
+            .control-btn {
+                min-height: 22px;
+                font-size: 0.48rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<!-- Loading Screen -->
-<div class="loader" id="loader">
-<div class="loader-content">
-<div class="loader-icon"><i class="fas fa-seedling"></i></div>
-<div class="loader-text" id="loadingText">SANTA DEL ARTE</div>
-<div class="loader-subtext">Creando múltiples versos...</div>
-<div class="loader-progress">
-<div class="progress-bar" id="progressBar"></div>
-</div>
-</div>
-</div>
 
-<div class="brand-stamp stamp-1">SANTA DEL ARTE</div>
-<div class="brand-stamp stamp-2">SAN ARTE</div>
+    <div id="loader"><div class="spinner"></div></div>
 
-<nav class="navbar" id="navbar">
-<div class="nav-container">
-<a href="#" class="brand-logo">
-<i class="fas fa-seedling brand-icon"></i>
-Santa del Arte
-<span>san arte</span>
-</a>
-<div class="nav-links" id="navLinks">
-<a href="#pvu" class="nav-link">Propuesta</a>
-<a href="#ejes" class="nav-link">Ejes</a>
-<a href="#model" class="nav-link">Servicios</a>
-<a href="#contact" class="nav-link">Contacto</a>
-</div>
-<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú">
-<i class="fas fa-bars"></i>
-</button>
-</div>
-</nav>
+    <div id="canvas-container"></div>
 
-<section class="hero">
-<div class="hero-content">
-<div class="rebirth-badge">CUERPO TIERRA</div>
-<h1 class="hero-title">Santa del Arte</h1>
-<div class="hero-subtitle">San Arte</div>
-<p class="hero-text">Suturando el mejor de los mundos posibles</p>
-<div class="cta-container">
-<a href="#ejes" class="btn btn-primary">
-<i class="fas fa-compass"></i> Explorar Ejes
-</a>
-<a href="#contact" class="btn btn-secondary">
-<i class="fas fa-envelope"></i> Contacto
-</a>
-</div>
-</div>
-</section>
+    <div id="ui-layer">
+        <div class="header">
+            <h1>Entre el icosaedro y quasicristal</h1>
+            <p class="subtitle">o de la kinesfera a la kinegea</p>
+        </div>
+    </div>
 
-<section class="section pvu-section" id="pvu">
-<div class="container">
-<div class="section-header fade-in">
-<h2 class="section-title">Propuesta de Trabajo</h2>
-<p class="section-subtitle">Invención de experiencias comunitarias e individuales a través de la fusión entre arte, ciencia y filosofía</p>
-</div>
-<div class="pvu-container">
-<div class="pvu-content fade-in">
-<div class="pvu-icon"><i class="fas fa-flag"></i></div>
-<h3 class="pvu-title">MISIÓN</h3>
-<p class="pvu-text">Brindar servicios de sanación y autosanación multidisciplinaria de base artística, co-creados por profesionales con más de 10 años de experiencia, combinando rigor académico con prácticas innovadoras.</p>
-<div class="differentiators">
-<span class="differentiator">CUERPO TIERRA</span>
-<span class="differentiator">PROPIOCEPCIÓN</span>
-<span class="differentiator">RIGOR FLEXIBLE</span>
-<span class="differentiator">MULTIDISCIPLINARIEDAD</span>
-</div>
-</div>
-</div>
-</div>
-</section>
+    <!-- Legend Panel -->
+    <div id="legend">
+        <div class="legend-title" id="legend-title">Composición</div>
+        
+        <div class="legend-section">
+            <div class="legend-section-title">Exterior</div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #ff4d4d; color: #ff4d4d;"></div>
+                <span>Ho</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #4dff4d; color: #4dff4d;"></div>
+                <span>Mg</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #4d9eff; color: #4d9eff;"></div>
+                <span>Zn</span>
+            </div>
+        </div>
 
-<section class="section tabs-section" id="ejes">
-<div class="container">
-<div class="section-header fade-in">
-<h2 class="section-title">Nuestros 3 Ejes</h2>
-<p class="section-subtitle">Explora las dimensiones de nuestra práctica</p>
-</div>
-<div class="tabs-wrapper fade-in">
-<div class="tab-nav">
-<button class="tab-btn active" data-tab="botica">
-<i class="fas fa-book-open"></i> Botica Literaria
-</button>
-<button class="tab-btn" data-tab="cuerpo">
-<i class="fas fa-hands"></i> Cuerpo
-</button>
-<button class="tab-btn" data-tab="arte">
-<i class="fas fa-music"></i> Arte
-</button>
-</div>
-<div class="tab-content-wrapper">
-<div id="botica" class="tab-pane active">
-<div class="tab-pane-header">
-<div class="tab-pane-icon"><i class="fas fa-feather-alt"></i></div>
-<h3 class="tab-pane-title">Botica Literaria</h3>
-<p class="tab-pane-subtitle">Letras medicina</p>
-<p class="tab-pane-text">Un espacio donde la palabra se convierte en herramienta de sanación. Ofrecemos servicios de escritura terapéutica, objetos literarios personalizados y poesía como vehículo de transformación emocional, integrando la tradición con la innovación digital.</p>
-<ul class="tab-services-list">
-<li><i class="fas fa-check-circle"></i> Lazzeratura y escritura terapéutica</li>
-<li><i class="fas fa-check-circle"></i> Neo-Objetos Literarios y correspondencia poética</li>
-<li><i class="fas fa-check-circle"></i> Textos de Poder: rezos, conjuros y algoritmos</li>
-<li><i class="fas fa-check-circle"></i> Poemas Express</li>
-</ul>
-</div>
-<div class="tab-pane-visual"><i class="fas fa-scroll"></i></div>
-</div>
-<div id="cuerpo" class="tab-pane">
-<div class="tab-pane-header">
-<div class="tab-pane-icon"><i class="fas fa-spa"></i></div>
-<h3 class="tab-pane-title">Cuerpo</h3>
-<p class="tab-pane-subtitle">Háptica social y sanación física</p>
-<p class="tab-pane-text">Reconectamos con la sabiduría del cuerpo a través de terapias holísticas y sociales. Nuestro enfoque integra técnicas ancestrales y modernas para liberar tensiones, promover la nutrición consciente y facilitar la expresión corporal como acto de justicia y cuidado.</p>
-<ul class="tab-services-list">
-<li><i class="fas fa-check-circle"></i> Acupuntura láser y masaje terapéutico</li>
-<li><i class="fas fa-check-circle"></i> Danzaterapia y Danzastre</li>
-<li><i class="fas fa-check-circle"></i> Nutrición consciente con enfoque holístico</li>
-<li><i class="fas fa-check-circle"></i> Variaciones sobre el cuerpo y aceites esenciales</li>
-</ul>
-</div>
-<div class="tab-pane-visual"><i class="fas fa-hands-holding-circle"></i></div>
-</div>
-<div id="arte" class="tab-pane">
-<div class="tab-pane-header">
-<div class="tab-pane-icon"><i class="fas fa-palette"></i></div>
-<h3 class="tab-pane-title">Arte</h3>
-<p class="tab-pane-subtitle">Otras técnicas de curación</p>
-<p class="tab-pane-text">El arte como puente para sanar heridas emocionales. Exploramos múltiples medios expresivos (fotografía, cine, danza, filosofía y poesía) para crear experiencias interactivas que fomenten la transformación personal y colectiva.</p>
-<ul class="tab-services-list">
-<li><i class="fas fa-check-circle"></i> Arte-sanación en múltiples medios</li>
-<li><i class="fas fa-check-circle"></i> Fractales sonoros y música transformadora</li>
-<li><i class="fas fa-check-circle"></i> Intersección de ciencia, filosofía y poesía</li>
-<li><i class="fas fa-check-circle"></i> Experiencias de arte interactivo y comunitario</li>
-</ul>
-</div>
-<div class="tab-pane-visual"><i class="fas fa-infinity"></i></div>
-</div>
-</div>
-</div>
-</div>
-</section>
+        <div class="legend-section">
+            <div class="legend-section-title">Interior</div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #ff0000; color: #ff0000;"></div>
+                <span>Icosaedro (Rojo)</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #87ceeb; color: #87ceeb;"></div>
+                <span>Cubo (Azul Cielo)</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #ffd700; color: #ffd700;"></div>
+                <span>Icosidodecaedro (Amarillo)</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #00ffff; color: #00ffff;"></div>
+                <span>Geodésico (F3)</span>
+            </div>
+        </div>
 
-<section class="section business-model" id="model">
-<div class="container">
-<div class="section-header fade-in">
-<h2 class="section-title">Tipo de Servicios</h2>
-<p class="section-subtitle">Encuentra lo que mejor se adapte a tus necesidades, tenemos todo tipo de opciones</p>
-</div>
-<div class="pricing-grid">
-<div class="tier-card tier-premium fade-in">
-<h3 class="tier-name">Élite</h3>
-<p class="tier-description">Servicios especializados de alta valía</p>
-<ul class="tier-features">
-<li>Acupuntura láser con sonoterapia y aromaterapia</li>
-<li>Ciclos de terapias personalizadas</li>
-<li>Sesiones uno a uno con expertos multidisciplinarios</li>
-</ul>
-</div>
-<div class="tier-card tier-accessible fade-in">
-<h3 class="tier-name">Accesible</h3>
-<p class="tier-description">Paquetes con precios escalonados</p>
-<ul class="tier-features">
-<li>Masaje a domicilio</li>
-<li>Danzanación (Danzastre)</li>
-<li>Tutoriales de automasaje y bienestar</li>
-</ul>
-</div>
-<div class="tier-card tier-freemium fade-in">
-<h3 class="tier-name">Gratis</h3>
-<p class="tier-description">Contenido gratuito para la comunidad</p>
-<ul class="tier-features">
-<li>Meditaciones guiadas en YouTube</li>
-<li>Newsletter semanal y poemas diarios</li>
-<li>Acceso a comunidad digital y foros</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
+        <div class="legend-section">
+            <div class="legend-section-title">Planos Laban</div>
+            <div class="legend-item plane">
+                <div class="color-dot" style="background-color: #ff6b6b; color: #ff6b6b;"></div>
+                <span>Sagital</span>
+            </div>
+            <div class="legend-item plane">
+                <div class="color-dot" style="background-color: #4ecdc4; color: #4ecdc4;"></div>
+                <span>Frontal</span>
+            </div>
+            <div class="legend-item plane">
+                <div class="color-dot" style="background-color: #ffe66d; color: #ffe66d;"></div>
+                <span>Transverso</span>
+            </div>
+        </div>
 
-<section class="section contact-section" id="contact">
-<div class="container">
-<div class="section-header fade-in">
-<h2 class="section-title">Acércate</h2>
-<p class="section-subtitle">Únete a nuestra comunidad de transformación colectiva</p>
-</div>
-<div class="contact-container">
-<div class="contact-card contact-info fade-in">
-<h3 class="contact-title">Información de Contacto</h3>
-<a href="mailto:santadelarte@gmail.com" class="contact-email">
-<i class="fas fa-envelope"></i> santadelarte@gmail.com
-</a>
-<div class="social-links">
-<a href="https://youtube.com/@santadelarte" class="social-link" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-<a href="https://tiktok.com/@santa.del.arte" class="social-link" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-<a href="https://instagram.com/santadelarte" class="social-link" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-<a href="https://facebook.com/santadelarte" class="social-link" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-</div>
-<div style="margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: 1px solid var(--sage);">
-<p style="color: var(--moss-green); font-style: italic; line-height: 1.6; font-family: 'Inter', sans-serif; text-align: center;">
-<i class="fas fa-map-marker-alt"></i> Experiencias integrales en México
-</p>
-</div>
-</div>
-<div class="contact-card contact-form fade-in">
-<h3 class="contact-title">Envíanos un Mensaje</h3>
-<div id="formMessage" class="form-message"></div>
-<form id="contactForm">
-<div class="form-group">
-<label for="name" class="form-label">Nombre</label>
-<input type="text" id="name" class="form-control" required placeholder="Tu nombre">
-</div>
-<div class="form-group">
-<label for="email" class="form-label">Email</label>
-<input type="email" id="email" class="form-control" required placeholder="Tu @email.com">
-</div>
-<div class="form-group">
-<label for="message" class="form-label">Mensaje</label>
-<textarea id="message" class="form-control" required placeholder="Tu mensaje" rows="4"></textarea>
-</div>
-<input type="hidden" name="date" id="formDate">
-<button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--space-md);">
-<span id="buttonText"><i class="fas fa-paper-plane"></i> Enviar Mensaje</span>
-</button>
-</form>
-</div>
-</div>
-</div>
-</section>
+        <div class="legend-section">
+            <div class="legend-section-title">Centro</div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #ffffff; color: #ffffff;"></div>
+                <span>Möbius</span>
+            </div>
+        </div>
 
-<section class="cta-section">
-<div class="container">
-<div class="cta-content fade-in">
-<h2 class="cta-title">No hay inspiración sin transpiración</h2>
-<p class="cta-text">Trabajamos para celebrar el tiempo del mundo con la fiesta más amorosa de todos los espacios</p>
-<a href="#contact" class="btn btn-secondary">
-<i class="fas fa-seedling"></i> Iniciar aventura
-</a>
-</div>
-</div>
-</section>
+        <div class="legend-section">
+            <div class="legend-section-title">Esferas</div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #4a90d9; color: #4a90d9;"></div>
+                <span>Tierra (Oblato)</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #9b59b6; color: #9b59b6;"></div>
+                <span>3-Esfera</span>
+            </div>
+        </div>
 
-<footer>
-<div class="footer-content">
-<a href="#" class="footer-logo">Santa del Arte</a>
-<p class="copyright">&copy; <span id="year"></span> Santa del Arte. San Arte — Co-creando el mejor de los mundos posibles</p>
-<p style="margin-top: var(--space-sm); opacity: 0.7; font-size: var(--text-base);">
-santadelarte@gmail.com | Experiencias integrales trans, multi e interdisciplinarias
-</p>
-</div>
-</footer>
+        <div class="legend-section">
+            <div class="legend-section-title">Persona</div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #ffccaa; color: #ffccaa;"></div>
+                <span>Cuerpo (plexo solar)</span>
+            </div>
+        </div>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-simulateLoading();
-document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('formDate').value = new Date().toLocaleString('es-ES', {
-year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
-});
+        <div class="legend-section">
+            <div class="legend-section-title">Conexiones</div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #88aaff; color: #88aaff;"></div>
+                <span>Ico-Quasi</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-dot" style="background-color: #ff88aa; color: #ff88aa;"></div>
+                <span>Quasi-Icosido.</span>
+            </div>
+        </div>
+    </div>
 
-if (typeof emailjs !== 'undefined') {
-emailjs.init({ publicKey: "Qdo4Mytu6qaKIJ-6y", blockHead: true });
-}
+    <!-- Control Panel -->
+    <div id="control-panel">
+        <div class="control-title" id="control-title">🎮 Control</div>
+        
+        <div class="control-section">
+            <div class="control-row">
+                <button class="control-btn pause active" id="btn-pause" style="flex: 1;">
+                    <span><span class="btn-icon">⏯️</span> Pausar</span>
+                </button>
+            </div>
+        </div>
 
-setupNavigation();
-setupTabs();
-setupContactForm();
-setupScrollAnimations();
-setupMobileMenu();
-addNaturalAnimations();
-});
+        <div class="control-section">
+            <div class="control-section-title">⚡ Velocidad Global</div>
+            <div class="velocity-control">
+                <span class="velocity-label">Velocidad</span>
+                <div class="velocity-slider-container">
+                    <input type="range" class="velocity-slider" id="velocity-slider" min="1" max="100" step="1" value="50">
+                </div>
+                <span class="velocity-value" id="velocity-value">50%</span>
+            </div>
+        </div>
 
-function simulateLoading() {
-const loader = document.getElementById('loader');
-const progressBar = document.getElementById('progressBar');
-const loadingText = document.getElementById('loadingText');
-let progress = 0;
-const interval = setInterval(() => {
-progress += Math.random() * 10;
-if (progress > 100) progress = 100;
-progressBar.style.width = progress + '%';
-if (progress > 80 && loadingText.textContent === 'SANTA DEL ARTE') {
-loadingText.textContent = 'SAN ARTE';
-}
-if (progress >= 100) {
-clearInterval(interval);
-setTimeout(() => {
-loader.style.opacity = '0';
-setTimeout(() => {
-loader.style.display = 'none';
-document.body.style.opacity = '0';
-setTimeout(() => {
-document.body.style.transition = 'opacity 1s ease';
-document.body.style.opacity = '1';
-}, 50);
-}, 300);
-}, 400);
-}
-}, 100);
-}
+        <div class="control-section">
+            <div class="control-section-title">Visibilidad</div>
+            <div class="control-row">
+                <button class="control-btn active" id="btn-quasicrystal">
+                    <span class="btn-icon">⬡</span> Quasi
+                </button>
+                <button class="control-btn active" id="btn-icosahedron">
+                    <span class="btn-icon">🔶</span> Ico
+                </button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn active" id="btn-cube">
+                    <span class="btn-icon">📦</span> Cubo
+                </button>
+                <button class="control-btn" id="btn-icosidodecahedron">
+                    <span class="btn-icon">✦</span> Icosido.
+                </button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn" id="btn-geodesic">
+                    <span class="btn-icon">🌐</span> Geodésico
+                </button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn" id="btn-mobius">
+                    <span class="btn-icon">∞</span> Möbius
+                </button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn" id="btn-spheroid">
+                    <span class="btn-icon">🌍</span> Tierra
+                </button>
+                <button class="control-btn" id="btn-poincare">
+                    <span class="btn-icon">🔮</span> 3-Esfera
+                </button>
+            </div>
+            <div class="control-section-title" style="margin-top: 6px;">Planos</div>
+            <div class="control-row">
+                <button class="control-btn active" id="btn-plane-sagittal">
+                    <span class="btn-icon">🔴</span> Sag
+                </button>
+                <button class="control-btn active" id="btn-plane-frontal">
+                    <span class="btn-icon">🔵</span> Fro
+                </button>
+                <button class="control-btn active" id="btn-plane-transverse">
+                    <span class="btn-icon">🟡</span> Tra
+                </button>
+            </div>
+            <div class="control-section-title" style="margin-top: 6px;">Conexiones</div>
+            <div class="control-row">
+                <button class="control-btn active" id="btn-connections-ico">
+                    <span class="btn-icon">🔗</span> Ico-Quasi
+                </button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn" id="btn-connections-cid">
+                    <span class="btn-icon">🔗</span> Conex. C-ID
+                </button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn active" id="btn-human">
+                    <span class="btn-icon">🧑</span> Persona
+                </button>
+            </div>
+        </div>
 
-function setupNavigation() {
-const navbar = document.getElementById('navbar');
-const navLinks = document.querySelectorAll('.nav-link');
+        <div class="control-section">
+            <div class="control-section-title">Escala (1-200%)</div>
+            
+            <div class="control-row">
+                <span class="label-text">🔶 Ico</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="icosahedron" data-action="down">−</button>
+                    <span class="scale-value" id="scale-icosahedron-value">50%</span>
+                    <button class="scale-btn" data-scale="icosahedron" data-action="up">+</button>
+                </div>
+            </div>
 
-window.addEventListener('scroll', function() {
-if (navbar) {
-if (window.scrollY > 50) {
-navbar.classList.add('scrolled');
-} else {
-navbar.classList.remove('scrolled');
-}
-}
+            <div class="control-row">
+                <span class="label-text">⬡ Quasi</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="quasicrystal" data-action="down">−</button>
+                    <span class="scale-value" id="scale-quasicrystal-value">50%</span>
+                    <button class="scale-btn" data-scale="quasicrystal" data-action="up">+</button>
+                </div>
+            </div>
 
-const sections = ['pvu', 'ejes', 'model', 'contact'];
-const scrollPosition = window.scrollY + 100;
+            <div class="control-row">
+                <span class="label-text">📦 Cubo</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="cube" data-action="down">−</button>
+                    <span class="scale-value" id="scale-cube-value">50%</span>
+                    <button class="scale-btn" data-scale="cube" data-action="up">+</button>
+                </div>
+            </div>
 
-navLinks.forEach(link => link.classList.remove('active'));
-sections.forEach(sectionId => {
-const section = document.getElementById(sectionId);
-if (section) {
-const sectionTop = section.offsetTop;
-const sectionHeight = section.offsetHeight;
-if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-const activeLink = document.querySelector('.nav-link[href="#' + sectionId + '"]');
-if (activeLink) activeLink.classList.add('active');
-}
-}
-});
-});
+            <div class="control-row">
+                <span class="label-text">✦ Icosido.</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="icosidodecahedron" data-action="down">−</button>
+                    <span class="scale-value" id="scale-icosidodecahedron-value">50%</span>
+                    <button class="scale-btn" data-scale="icosidodecahedron" data-action="up">+</button>
+                </div>
+            </div>
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function(e) {
-e.preventDefault();
-const targetId = this.getAttribute('href');
-if (targetId === '#') return;
-const targetElement = document.querySelector(targetId);
-if (targetElement) {
-window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
-}
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinksContainer = document.getElementById('navLinks');
-if (navLinksContainer && navLinksContainer.classList.contains('active')) {
-navLinksContainer.classList.remove('active');
-if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-}
-});
-});
-}
+            <div class="control-row">
+                <span class="label-text">🌐 Geodésico</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="geodesic" data-action="down">−</button>
+                    <span class="scale-value" id="scale-geodesic-value">50%</span>
+                    <button class="scale-btn" data-scale="geodesic" data-action="up">+</button>
+                </div>
+            </div>
 
-function setupTabs() {
-const tabBtns = document.querySelectorAll('.tab-btn');
-const tabPanes = document.querySelectorAll('.tab-pane');
+            <div class="control-row">
+                <span class="label-text">📐 Planos</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="planes" data-action="down">−</button>
+                    <span class="scale-value" id="scale-planes-value">50%</span>
+                    <button class="scale-btn" data-scale="planes" data-action="up">+</button>
+                </div>
+            </div>
 
-tabBtns.forEach(btn => {
-btn.addEventListener('click', () => {
-tabBtns.forEach(b => b.classList.remove('active'));
-tabPanes.forEach(p => p.classList.remove('active'));
-btn.classList.add('active');
-const tabId = btn.getAttribute('data-tab');
-const activePane = document.getElementById(tabId);
-if (activePane) activePane.classList.add('active');
-});
-});
-}
+            <div class="control-row">
+                <span class="label-text">∞ Möbius</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="mobius" data-action="down">−</button>
+                    <span class="scale-value" id="scale-mobius-value">50%</span>
+                    <button class="scale-btn" data-scale="mobius" data-action="up">+</button>
+                </div>
+            </div>
 
-function setupMobileMenu() {
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
-if (!mobileMenuBtn || !navLinks) return;
+            <div class="control-row">
+                <span class="label-text">🌍 Tierra</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="spheroid" data-action="down">−</button>
+                    <span class="scale-value" id="scale-spheroid-value">50%</span>
+                    <button class="scale-btn" data-scale="spheroid" data-action="up">+</button>
+                </div>
+            </div>
 
-mobileMenuBtn.addEventListener('click', function() {
-navLinks.classList.toggle('active');
-if (navLinks.classList.contains('active')) {
-mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-} else {
-mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-}
-});
-}
+            <div class="control-row">
+                <span class="label-text">🔮 3-Esfera</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="poincare" data-action="down">−</button>
+                    <span class="scale-value" id="scale-poincare-value">50%</span>
+                    <button class="scale-btn" data-scale="poincare" data-action="up">+</button>
+                </div>
+            </div>
 
-function setupScrollAnimations() {
-const fadeElements = document.querySelectorAll('.fade-in');
-const fadeObserver = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) entry.target.classList.add('appear');
-});
-}, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
-fadeElements.forEach(element => fadeObserver.observe(element));
-}
+            <div class="control-row">
+                <span class="label-text">🧑 Persona</span>
+                <div class="scale-controls">
+                    <button class="scale-btn" data-scale="human" data-action="down">−</button>
+                    <span class="scale-value" id="scale-human-value">50%</span>
+                    <button class="scale-btn" data-scale="human" data-action="up">+</button>
+                </div>
+            </div>
 
-function setupContactForm() {
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
-const button = contactForm.querySelector('.btn');
-const buttonText = document.getElementById('buttonText');
+            <div class="control-row" style="margin-top: 8px;">
+                <button class="control-btn" id="btn-scale-reset" style="flex: 1; background: rgba(77, 158, 255, 0.2); border-color: rgba(77, 158, 255, 0.4);">
+                    <span class="btn-icon">↺</span> Reset Escalas
+                </button>
+            </div>
+        </div>
 
-contactForm.addEventListener('submit', function(e) {
-e.preventDefault();
-formMessage.style.display = 'none';
-formMessage.className = 'form-message';
+        <!-- CINESIS (Rotación) -->
+        <div class="control-section">
+            <div class="control-section-title">🎯 Cinesis tras</div>
+            
+            <!-- Icosaedro -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">🔶 Icosaedro</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="ico-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="ico-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="ico-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="ico-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="ico-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="ico-rot-z-val">0</span>
+                </div>
+            </div>
 
-const name = document.getElementById('name').value.trim();
-const email = document.getElementById('email').value.trim();
-const message = document.getElementById('message').value.trim();
+            <!-- Quasicristal -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">⬡ Quasicristal</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="quasi-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="quasi-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="quasi-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="quasi-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="quasi-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="quasi-rot-z-val">0</span>
+                </div>
+            </div>
 
-if (!name || name.length < 2) {
-showFormMessage('Por favor ingresa un nombre válido (mínimo 2 caracteres)', 'error');
-return;
-}
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-if (!email || !emailRegex.test(email)) {
-showFormMessage('Por favor ingresa un email válido', 'error');
-return;
-}
-if (!message || message.length < 10) {
-showFormMessage('El mensaje debe tener al menos 10 caracteres', 'error');
-return;
-}
+            <!-- Cubo -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">📦 Cubo</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="cube-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="cube-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="cube-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="cube-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="cube-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="cube-rot-z-val">0</span>
+                </div>
+            </div>
 
-button.disabled = true;
-buttonText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            <!-- Icosidodecaedro -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">✦ Icosidodecaedro</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="icoledo-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="icoledo-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="icoledo-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="icoledo-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="icoledo-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="icoledo-rot-z-val">0</span>
+                </div>
+            </div>
 
-emailjs.send("service_6dfufst", "template_ojv4at4", {
-from_name: name,
-from_email: email,
-message: message,
-date: new Date().toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-to_email: "santadelarte@gmail.com"
-})
-.then(function() {
-showFormMessage('¡Gracias por tu mensaje! Hemos recibido tu consulta y te responderemos pronto.', 'success');
-contactForm.reset();
-setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
-})
-.catch(function(error) {
-console.error('Error:', error);
-showFormMessage('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo o contacta directamente a santadelarte@gmail.com', 'error');
-})
-.finally(() => {
-button.disabled = false;
-buttonText.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Mensaje';
-});
-});
+            <!-- Geodésico -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">🌐 Geodésico</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="geo-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="geo-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="geo-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="geo-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="geo-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="geo-rot-z-val">0</span>
+                </div>
+            </div>
 
-function showFormMessage(text, type) {
-formMessage.textContent = text;
-formMessage.className = 'form-message ' + (type === 'success' ? 'success-message' : 'error-message');
-formMessage.style.display = 'block';
-if (type === 'error') {
-formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-}
-}
+            <!-- Esferoide/Tierra -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">🌍 Tierra</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="sph-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="sph-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="sph-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="sph-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="sph-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="sph-rot-z-val">0</span>
+                </div>
+            </div>
 
-function addNaturalAnimations() {
-setTimeout(() => {
-const heroContent = document.querySelector('.hero-content');
-if (heroContent) heroContent.style.animation = 'rebirthFade 1.2s ease-out forwards';
-}, 800);
-}
-</script>
+            <!-- 3-Esfera -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">🔮 3-Esfera</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="poi-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="poi-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="poi-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="poi-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="poi-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="poi-rot-z-val">0</span>
+                </div>
+            </div>
+
+            <!-- Plano Sagital -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">🔴 Plano Sagital</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="sag-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="sag-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="sag-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="sag-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="sag-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="sag-rot-z-val">0</span>
+                </div>
+            </div>
+
+            <!-- Plano Frontal -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">🔵 Plano Frontal</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="fro-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="fro-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="fro-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="fro-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="fro-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="fro-rot-z-val">0</span>
+                </div>
+            </div>
+
+            <!-- Plano Transverso -->
+            <div class="cinesis-figure-section">
+                <div class="cinesis-figure-title">🟡 Plano Transverso</div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-X</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="tra-rot-x" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="tra-rot-x-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Y</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="tra-rot-y" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="tra-rot-y-val">0</span>
+                </div>
+                <div class="cinesis-axis-row">
+                    <span class="cinesis-axis-label rot">R-Z</span>
+                    <div class="cinesis-slider-container">
+                        <input type="range" class="cinesis-slider" id="tra-rot-z" min="-3.14" max="3.14" step="0.05" value="0">
+                    </div>
+                    <span class="cinesis-value" id="tra-rot-z-val">0</span>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <button class="control-btn" id="btn-cinesis-reset" style="flex: 1; background: rgba(77, 158, 255, 0.15); border-color: rgba(77, 158, 255, 0.3);">
+                    <span class="btn-icon">↺</span> Reset Cinesis
+                </button>
+            </div>
+        </div>
+
+        <!-- KINESIS (Control de extremidades según Laban) -->
+        <div class="control-section">
+            <div class="control-section-title">Kinesis (direcciones de Laban)</div>
+            <div class="kinesis-selector">
+                <button class="control-btn" id="kinesis-extremity-leftarm">Brazo Izq</button>
+                <button class="control-btn" id="kinesis-extremity-rightarm">Brazo Der</button>
+                <button class="control-btn" id="kinesis-extremity-leftleg">Pierna Izq</button>
+                <button class="control-btn active" id="kinesis-extremity-rightleg">Pierna Der</button>
+            </div>
+            <div class="kinesis-grid" id="kinesis-dir-grid">
+                <!-- Se generarán 12 botones por JS -->
+            </div>
+            <div class="control-row" style="margin-top: 6px;">
+                <button class="control-btn" id="kinesis-reset" style="background: rgba(255, 150, 100, 0.15);">↺ Reset extremidades</button>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <div class="control-row">
+                <button class="control-btn" id="btn-reset" style="flex: 1; background: rgba(255, 100, 100, 0.15); border-color: rgba(255, 100, 100, 0.3);">
+                    <span class="btn-icon">🔄</span> Reset Total
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isLowEnd = isMobile && navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+
+        const appState = {
+            isPlaying: true,
+            velocity: 50,
+            showIcosahedron: true,
+            showLabanPlanes: true,
+            showConnectionsIco: true,
+            showConnectionsCID: false,
+            showQuasicrystal: true,
+            showMobius: false,
+            showCube: true,
+            showIcosidodecahedron: false,
+            showGeodesic: false,
+            showPlaneSagittal: true,
+            showPlaneFrontal: true,
+            showPlaneTransverse: true,
+            showHuman: true,
+            showSpheroid: false,
+            showPoincare: false,
+            scales: {
+                icosahedron: 0.5,
+                quasicrystal: 0.5,
+                cube: 0.5,
+                icosidodecahedron: 0.5,
+                geodesic: 0.5,
+                planes: 0.5,
+                mobius: 0.5,
+                spheroid: 0.5,
+                poincare: 0.5,
+                human: 0.5
+            },
+            cinesis: {
+                icosahedron: { rot: { x: 0, y: 0, z: 0 } },
+                quasicrystal: { rot: { x: 0, y: 0, z: 0 } },
+                cube: { rot: { x: 0, y: 0, z: 0 } },
+                icosidodecahedron: { rot: { x: 0, y: 0, z: 0 } },
+                geodesic: { rot: { x: 0, y: 0, z: 0 } },
+                spheroid: { rot: { x: 0, y: 0, z: 0 } },
+                poincare: { rot: { x: 0, y: 0, z: 0 } },
+                sagittal: { rot: { x: 0, y: 0, z: 0 } },
+                frontal: { rot: { x: 0, y: 0, z: 0 } },
+                transverse: { rot: { x: 0, y: 0, z: 0 } }
+            },
+            kinesis: {
+                leftArm: 1,
+                rightArm: 4,
+                leftLeg: 3,
+                rightLeg: 6
+            },
+            selectedExtremity: 'rightLeg'
+        };
+
+        const baseScales = {
+            icosahedron: 0.5,
+            quasicrystal: 0.5,
+            cube: 0.5,
+            icosidodecahedron: 0.5,
+            geodesic: 0.5,
+            planes: 0.5,
+            mobius: 0.5,
+            spheroid: 0.5,
+            poincare: 0.5,
+            human: 0.5
+        };
+
+        const baseCinesis = {
+            icosahedron: { rot: { x: 0, y: 0, z: 0 } },
+            quasicrystal: { rot: { x: 0, y: 0, z: 0 } },
+            cube: { rot: { x: 0, y: 0, z: 0 } },
+            icosidodecahedron: { rot: { x: 0, y: 0, z: 0 } },
+            geodesic: { rot: { x: 0, y: 0, z: 0 } },
+            spheroid: { rot: { x: 0, y: 0, z: 0 } },
+            poincare: { rot: { x: 0, y: 0, z: 0 } },
+            sagittal: { rot: { x: 0, y: 0, z: 0 } },
+            frontal: { rot: { x: 0, y: 0, z: 0 } },
+            transverse: { rot: { x: 0, y: 0, z: 0 } }
+        };
+
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x050508);
+        scene.fog = new THREE.FogExp2(0x050508, isMobile ? 0.008 : 0.012);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 150);
+        camera.position.set(14, 8, 16);
+
+        const renderer = new THREE.WebGLRenderer({ 
+            antialias: !isLowEnd,
+            alpha: true,
+            powerPreference: "high-performance",
+            preserveDrawingBuffer: false
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.4;
+        renderer.shadowMap.enabled = !isLowEnd;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        container.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.08;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.25;
+        controls.minDistance = 8;
+        controls.maxDistance = 40;
+        controls.enablePan = false;
+        controls.touchZoomDistance = { min: 8, max: 40 };
+
+        const ambientLight = new THREE.AmbientLight(0x404040, 2.2);
+        scene.add(ambientLight);
+
+        const mainLight = new THREE.DirectionalLight(0xffffff, 2.8);
+        mainLight.position.set(5, 10, 7);
+        if (!isLowEnd) mainLight.castShadow = true;
+        scene.add(mainLight);
+
+        const fillLight = new THREE.DirectionalLight(0x4d9eff, 1.8);
+        fillLight.position.set(-5, 0, -5);
+        scene.add(fillLight);
+
+        const phi = (1 + Math.sqrt(5)) / 2;
+        const baseOuterScale = 3.5;
+        const baseInnerScale = baseOuterScale * 0.795;
+        const basePlaneScale = baseInnerScale * 0.9;
+        const baseCubeScale = baseInnerScale * 0.65;
+        const baseSpheroidScale = baseInnerScale * 0.5;
+        const basePoincareScale = baseInnerScale * 0.53;
+        const baseIcosidodecahedronScale = baseInnerScale * 0.87;
+        const baseGeodesicScale = baseInnerScale * 0.75;
+
+        const sphereSegments = isLowEnd ? 16 : 24;
+        const planeSegments = isLowEnd ? 3 : 4;
+
+        const outerVertices = [];
+        
+        for (let i of [-1, 1]) {
+            for (let j of [-1, 1]) {
+                for (let k of [-1, 1]) {
+                    outerVertices.push(new THREE.Vector3(i, j, k));
+                }
+            }
+        }
+
+        const a = 1 / phi;
+        const b = phi;
+        const perms = [
+            [0, a, b], [0, -a, b], [0, a, -b], [0, -a, -b],
+            [a, b, 0], [-a, b, 0], [a, -b, 0], [-a, -b, 0],
+            [b, 0, a], [-b, 0, a], [b, 0, -a], [-b, 0, -a]
+        ];
+
+        perms.forEach(p => {
+            outerVertices.push(new THREE.Vector3(p[0], p[1], p[2]));
+        });
+
+        const innerVertices = [];
+        
+        const innerPerms = [
+            [0, 1, phi], [0, -1, phi], [0, 1, -phi], [0, -1, -phi],
+            [1, phi, 0], [-1, phi, 0], [1, -phi, 0], [-1, -phi, 0],
+            [phi, 0, 1], [-phi, 0, 1], [phi, 0, -1], [-phi, 0, -1]
+        ];
+
+        innerPerms.forEach(p => {
+            const v = new THREE.Vector3(p[0], p[1], p[2]);
+            v.normalize();
+            innerVertices.push(v);
+        });
+
+        const cubeVertices = [
+            new THREE.Vector3(-1, -1, -1),
+            new THREE.Vector3(-1, -1, 1),
+            new THREE.Vector3(-1, 1, -1),
+            new THREE.Vector3(-1, 1, 1),
+            new THREE.Vector3(1, -1, -1),
+            new THREE.Vector3(1, -1, 1),
+            new THREE.Vector3(1, 1, -1),
+            new THREE.Vector3(1, 1, 1)
+        ];
+
+        const outerAtomGroup = new THREE.Group();
+        const innerAtomGroup = new THREE.Group();
+        const cubeGroup = new THREE.Group();
+        const icosidodecahedronGroup = new THREE.Group();
+        const geodesicGroup = new THREE.Group();
+        const spheroidGroup = new THREE.Group();
+        const poincareGroup = new THREE.Group();
+        const outerEdgeGroup = new THREE.Group();
+        const innerEdgeGroup = new THREE.Group();
+        const cubeEdgeGroup = new THREE.Group();
+        const connectionGroup = new THREE.Group();
+        const connectionCIDGroup = new THREE.Group();
+        const planesGroup = new THREE.Group();
+        const mobiusGroup = new THREE.Group();
+
+        const outerColors = [0xff4d4d, 0x4dff4d, 0x4d9eff];
+        const innerColor = 0xff0000;
+        const cubeColor = 0x87ceeb; // CAMBIADO A AZUL CIELO
+        const icosidodecahedronTriangleColor = 0xffd700;
+        const icosidodecahedronPentagonColor = 0xffe066;
+        const icosidodecahedronEdgeColor = 0xffaa00;
+        const icosidodecahedronVertexColor = 0xffaa00;
+
+        const geodesicBaseColor = 0x0088aa;
+        const geodesicEdgeColor = 0x00ffff;
+        const geodesicVertexColor = 0xff3333;
+        const spheroidColor = 0x4a90d9;
+        const poincareColor = 0x9b59b6;
+
+        const sagittalColor = 0xff6b6b;
+        const frontalColor = 0x4ecdc4;
+        const transverseColor = 0xffe66d;
+
+        const outerAtomMaterials = outerColors.map(c => 
+            new THREE.MeshStandardMaterial({
+                color: c,
+                roughness: 0.3,
+                metalness: 0.7,
+                emissive: c,
+                emissiveIntensity: 0.35
+            })
+        );
+
+        const innerAtomMaterial = new THREE.MeshStandardMaterial({
+            color: innerColor,
+            roughness: 0.2,
+            metalness: 0.8,
+            emissive: innerColor,
+            emissiveIntensity: 0.6
+        });
+
+        const cubeAtomMaterial = new THREE.MeshStandardMaterial({
+            color: cubeColor,
+            roughness: 0.2,
+            metalness: 0.8,
+            emissive: cubeColor,
+            emissiveIntensity: 0.5
+        });
+
+        const outerAtomGeo = new THREE.SphereGeometry(0.058, sphereSegments, sphereSegments);
+        const innerAtomGeo = new THREE.SphereGeometry(0.047, sphereSegments, sphereSegments);
+        const cubeAtomGeo = new THREE.SphereGeometry(0.05, sphereSegments, sphereSegments);
+
+        outerVertices.forEach((pos, index) => {
+            const material = outerAtomMaterials[index % 3];
+            const atom = new THREE.Mesh(outerAtomGeo, material);
+            atom.position.copy(pos).multiplyScalar(baseOuterScale);
+            if (!isLowEnd) {
+                atom.castShadow = true;
+                atom.receiveShadow = true;
+            }
+            atom.userData = { baseScale: 1, offset: index * 0.3, basePos: pos.clone() };
+            outerAtomGroup.add(atom);
+        });
+
+        innerVertices.forEach((pos, index) => {
+            const atom = new THREE.Mesh(innerAtomGeo, innerAtomMaterial);
+            atom.position.copy(pos).multiplyScalar(baseInnerScale);
+            if (!isLowEnd) {
+                atom.castShadow = true;
+                atom.receiveShadow = true;
+            }
+            atom.userData = { baseScale: 1, offset: index * 0.5, basePos: pos.clone() };
+            innerAtomGroup.add(atom);
+        });
+
+        cubeVertices.forEach((pos, index) => {
+            const atom = new THREE.Mesh(cubeAtomGeo, cubeAtomMaterial);
+            atom.position.copy(pos).multiplyScalar(baseCubeScale);
+            if (!isLowEnd) {
+                atom.castShadow = true;
+                atom.receiveShadow = true;
+            }
+            atom.userData = { baseScale: 1, offset: index * 0.4, basePos: pos.clone() };
+            cubeGroup.add(atom);
+        });
+
+        function createIcosidodecahedron() {
+            const group = new THREE.Group();
+            
+            const geometry = new THREE.IcosahedronGeometry(baseIcosidodecahedronScale, 1);
+            
+            const triangleMaterial = new THREE.MeshPhongMaterial({
+                color: icosidodecahedronTriangleColor,
+                shininess: 100,
+                specular: 0x444444,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.95,
+                emissive: 0x554400,
+                emissiveIntensity: 0.4
+            });
+
+            const pentagonMaterial = new THREE.MeshPhongMaterial({
+                color: icosidodecahedronPentagonColor,
+                shininess: 100,
+                specular: 0x444444,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.95,
+                emissive: 0x554400,
+                emissiveIntensity: 0.4
+            });
+
+            const mesh = new THREE.Mesh(geometry, [triangleMaterial, pentagonMaterial]);
+            group.add(mesh);
+            
+            const edgesGeometry = new THREE.EdgesGeometry(geometry);
+            const edgesMaterial = new THREE.LineBasicMaterial({ 
+                color: icosidodecahedronEdgeColor, 
+                linewidth: 6,
+                transparent: true,
+                opacity: 0.8
+            });
+            const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+            group.add(edges);
+
+            const positions = geometry.attributes.position.array;
+            const uniqueVertices = [];
+            const vertexSet = new Set();
+            
+            for (let i = 0; i < positions.length; i += 3) {
+                const x = positions[i].toFixed(4);
+                const y = positions[i + 1].toFixed(4);
+                const z = positions[i + 2].toFixed(4);
+                const key = `${x},${y},${z}`;
+                
+                if (!vertexSet.has(key)) {
+                    vertexSet.add(key);
+                    uniqueVertices.push(new THREE.Vector3(positions[i], positions[i + 1], positions[i + 2]));
+                }
+            }
+            
+            const vertexGeo = new THREE.SphereGeometry(0.06, 8, 8);
+            const vertexMat = new THREE.MeshStandardMaterial({
+                color: icosidodecahedronVertexColor,
+                roughness: 0.3,
+                metalness: 0.6,
+                emissive: icosidodecahedronVertexColor,
+                emissiveIntensity: 0.5
+            });
+            
+            uniqueVertices.forEach(pos => {
+                const vertex = new THREE.Mesh(vertexGeo, vertexMat);
+                vertex.position.copy(pos);
+                if (!isLowEnd) {
+                    vertex.castShadow = true;
+                    vertex.receiveShadow = true;
+                }
+                group.add(vertex);
+            });
+
+            return group;
+        }
+
+        const icosidodecahedron = createIcosidodecahedron();
+        icosidodecahedronGroup.add(icosidodecahedron);
+
+        function createGeodesicIcosahedron(frequency = 3, radius = baseGeodesicScale) {
+            const group = new THREE.Group();
+            
+            const geometry = new THREE.IcosahedronGeometry(radius * 2, frequency);
+            
+            const baseMaterial = new THREE.MeshPhongMaterial({
+                color: geodesicBaseColor,
+                transparent: true,
+                opacity: 0.85,
+                side: THREE.DoubleSide,
+                shininess: 60,
+                specular: 0x224455,
+                emissive: 0x002233,
+                emissiveIntensity: 0.5
+            });
+            
+            const mesh = new THREE.Mesh(geometry, baseMaterial);
+            group.add(mesh);
+            
+            const edgesGeometry = new THREE.EdgesGeometry(geometry);
+            const edgesMaterial = new THREE.LineBasicMaterial({
+                color: geodesicEdgeColor,
+                linewidth: 2,
+                transparent: true,
+                opacity: 1.0
+            });
+            const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+            group.add(edges);
+            
+            const originalVertices = [
+                new THREE.Vector3(0, 1, phi), new THREE.Vector3(0, -1, phi),
+                new THREE.Vector3(0, 1, -phi), new THREE.Vector3(0, -1, -phi),
+                new THREE.Vector3(1, phi, 0), new THREE.Vector3(-1, phi, 0),
+                new THREE.Vector3(1, -phi, 0), new THREE.Vector3(-1, -phi, 0),
+                new THREE.Vector3(phi, 0, 1), new THREE.Vector3(-phi, 0, 1),
+                new THREE.Vector3(phi, 0, -1), new THREE.Vector3(-phi, 0, -1)
+            ];
+            
+            const nodeGeometry = new THREE.SphereGeometry(0.12, 16, 16);
+            const nodeMaterial = new THREE.MeshBasicMaterial({
+                color: geodesicVertexColor,
+                emissive: 0xff0000,
+                emissiveIntensity: 1.0
+            });
+            
+            originalVertices.forEach(v => {
+                const pos = v.clone().normalize().multiplyScalar(radius * 2);
+                const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+                node.position.copy(pos);
+                group.add(node);
+            });
+            
+            return group;
+        }
+
+        const geodesic = createGeodesicIcosahedron(3, 1);
+        geodesicGroup.add(geodesic);
+
+        function createOblateSpheroid() {
+            const spheroidGroup = new THREE.Group();
+            
+            const equatorialRadius = baseSpheroidScale;
+            const polarRadius = baseSpheroidScale * 0.85;
+            
+            const geometry = new THREE.SphereGeometry(1, sphereSegments * 2, sphereSegments * 2);
+            geometry.scale(equatorialRadius, polarRadius, equatorialRadius);
+            
+            const material = new THREE.MeshStandardMaterial({
+                color: spheroidColor,
+                roughness: 0.5,
+                metalness: 0.3,
+                emissive: 0x1a3a5c,
+                emissiveIntensity: 0.2,
+                transparent: true,
+                opacity: 0.675
+            });
+            
+            const spheroid = new THREE.Mesh(geometry, material);
+            spheroid.userData = { baseScale: 1 };
+            spheroidGroup.add(spheroid);
+            
+            if (!isLowEnd) {
+                const wireframeMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x6ab0ff,
+                    transparent: true,
+                    opacity: 0.15,
+                    wireframe: true
+                });
+                const wireframe = new THREE.Mesh(geometry, wireframeMaterial);
+                spheroidGroup.add(wireframe);
+            }
+            
+            return spheroidGroup;
+        }
+
+        const spheroid = createOblateSpheroid();
+        spheroidGroup.add(spheroid);
+
+        function create3Sphere() {
+            const poincareGroup = new THREE.Group();
+            
+            const geometry = new THREE.SphereGeometry(basePoincareScale, sphereSegments * 3, sphereSegments * 3);
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+            
+            const gradient = ctx.createRadialGradient(256, 128, 0, 256, 128, 200);
+            gradient.addColorStop(0, 'rgba(155, 89, 182, 0.6)');
+            gradient.addColorStop(0.5, 'rgba(142, 68, 173, 0.4)');
+            gradient.addColorStop(1, 'rgba(108, 52, 131, 0.2)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 512, 256);
+            
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 6; i++) {
+                const radius = 40 + i * 20;
+                ctx.beginPath();
+                ctx.arc(256, 128, radius, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            
+            for (let i = 0; i < 8; i++) {
+                const angle = (i / 8) * Math.PI * 2;
+                ctx.beginPath();
+                ctx.moveTo(256, 128);
+                ctx.lineTo(256 + Math.cos(angle) * 100, 128 + Math.sin(angle) * 100);
+                ctx.stroke();
+            }
+            
+            const texture = new THREE.CanvasTexture(canvas);
+            
+            const material = new THREE.MeshStandardMaterial({
+                map: texture,
+                color: poincareColor,
+                roughness: 0.3,
+                metalness: 0.4,
+                emissive: 0x4a235a,
+                emissiveIntensity: 0.4,
+                transparent: true,
+                opacity: 1.0,
+                side: THREE.DoubleSide
+            });
+            
+            const poincare = new THREE.Mesh(geometry, material);
+            poincare.userData = { baseScale: 1 };
+            poincareGroup.add(poincare);
+            
+            if (!isLowEnd) {
+                const wireframeMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xd7bde2,
+                    transparent: true,
+                    opacity: 0.2,
+                    wireframe: true
+                });
+                const wireframe = new THREE.Mesh(geometry, wireframeMaterial);
+                poincareGroup.add(wireframe);
+            }
+            
+            const pointsGeometry = new THREE.BufferGeometry();
+            const pointsPositions = [];
+            for (let i = 0; i < 50; i++) {
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                const r = basePoincareScale;
+                pointsPositions.push(
+                    r * Math.sin(phi) * Math.cos(theta),
+                    r * Math.sin(phi) * Math.sin(theta),
+                    r * Math.cos(phi)
+                );
+            }
+            pointsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(pointsPositions, 3));
+            
+            const pointsMaterial = new THREE.PointsMaterial({
+                color: 0xf5b041,
+                size: 0.04,
+                transparent: true,
+                opacity: 0.7,
+                blending: THREE.AdditiveBlending
+            });
+            
+            const points = new THREE.Points(pointsGeometry, pointsMaterial);
+            poincareGroup.add(points);
+            
+            return poincareGroup;
+        }
+
+        const poincare = create3Sphere();
+        poincareGroup.add(poincare);
+
+        function updateCubeEdges() {
+            const cubeEdgePoints = [];
+            const edges = [
+                [0, 1], [0, 2], [0, 4],
+                [1, 3], [1, 5],
+                [2, 3], [2, 6],
+                [3, 7],
+                [4, 5], [4, 6],
+                [5, 7],
+                [6, 7]
+            ];
+            
+            edges.forEach(([i, j]) => {
+                cubeEdgePoints.push(cubeVertices[i].clone().multiplyScalar(baseCubeScale * appState.scales.cube));
+                cubeEdgePoints.push(cubeVertices[j].clone().multiplyScalar(baseCubeScale * appState.scales.cube));
+            });
+            
+            cubeEdgesMesh.geometry.dispose();
+            cubeEdgesMesh.geometry = new THREE.BufferGeometry().setFromPoints(cubeEdgePoints);
+        }
+
+        const cubeEdgesGeo = new THREE.BufferGeometry();
+        const cubeEdgesMat = new THREE.LineBasicMaterial({ 
+            color: cubeColor, 
+            transparent: true, 
+            opacity: 0.7,
+            blending: THREE.AdditiveBlending
+        });
+        const cubeEdgesMesh = new THREE.LineSegments(cubeEdgesGeo, cubeEdgesMat);
+        cubeEdgeGroup.add(cubeEdgesMesh);
+
+        function updateOuterEdges() {
+            const outerEdgePoints = [];
+            for (let i = 0; i < outerVertices.length; i++) {
+                for (let j = i + 1; j < outerVertices.length; j++) {
+                    const dist = outerVertices[i].distanceTo(outerVertices[j]);
+                    if (dist < 1.5 && dist > 0.1) {
+                        outerEdgePoints.push(outerVertices[i].clone().multiplyScalar(baseOuterScale * appState.scales.quasicrystal));
+                        outerEdgePoints.push(outerVertices[j].clone().multiplyScalar(baseOuterScale * appState.scales.quasicrystal));
+                    }
+                }
+            }
+            outerEdgesMesh.geometry.dispose();
+            outerEdgesMesh.geometry = new THREE.BufferGeometry().setFromPoints(outerEdgePoints);
+        }
+
+        const outerEdgesGeo = new THREE.BufferGeometry();
+        const outerEdgesMat = new THREE.LineBasicMaterial({ 
+            color: 0xaaaaaa, 
+            transparent: true, 
+            opacity: 0.65,
+            blending: THREE.AdditiveBlending
+        });
+        const outerEdgesMesh = new THREE.LineSegments(outerEdgesGeo, outerEdgesMat);
+        outerEdgeGroup.add(outerEdgesMesh);
+
+        function updateInnerEdges() {
+            const innerEdgePoints = [];
+            for (let i = 0; i < innerVertices.length; i++) {
+                for (let j = i + 1; j < innerVertices.length; j++) {
+                    const dist = innerVertices[i].distanceTo(innerVertices[j]);
+                    if (dist < 1.15 && dist > 0.1) {
+                        innerEdgePoints.push(innerVertices[i].clone().multiplyScalar(baseInnerScale * appState.scales.icosahedron));
+                        innerEdgePoints.push(innerVertices[j].clone().multiplyScalar(baseInnerScale * appState.scales.icosahedron));
+                    }
+                }
+            }
+            innerEdgesMesh.geometry.dispose();
+            innerEdgesMesh.geometry = new THREE.BufferGeometry().setFromPoints(innerEdgePoints);
+        }
+
+        const innerEdgesGeo = new THREE.BufferGeometry();
+        const innerEdgesMat = new THREE.LineBasicMaterial({ 
+            color: innerColor,
+            transparent: true, 
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        const innerEdgesMesh = new THREE.LineSegments(innerEdgesGeo, innerEdgesMat);
+        innerEdgeGroup.add(innerEdgesMesh);
+
+        const connectionData = [];
+        
+        innerVertices.forEach((innerPos) => {
+            const distances = [];
+            outerVertices.forEach((outerPos) => {
+                const dist = innerPos.distanceTo(outerPos);
+                distances.push({ dist: dist, inner: innerPos.clone(), outer: outerPos.clone() });
+            });
+            
+            distances.sort((x, y) => x.dist - y.dist);
+            
+            for (let k = 0; k < 3; k++) {
+                connectionData.push({
+                    inner: distances[k].inner,
+                    outer: distances[k].outer
+                });
+            }
+        });
+
+        function updateConnections(elapsedTime) {
+            const points = [];
+            
+            connectionData.forEach((conn, idx) => {
+                const innerPos = conn.inner.clone().multiplyScalar(baseInnerScale * appState.scales.icosahedron);
+                const outerPos = conn.outer.clone().multiplyScalar(baseOuterScale * appState.scales.quasicrystal);
+                
+                const midPoint = innerPos.clone().lerp(outerPos, 0.5);
+                
+                const direction = outerPos.clone().sub(innerPos).normalize();
+                const up = new THREE.Vector3(0, 1, 0);
+                const perpendicular = new THREE.Vector3().crossVectors(direction, up).normalize();
+                
+                const wave = Math.sin(elapsedTime * 0.6 + idx * 0.2) * 0.25;
+                midPoint.add(perpendicular.multiplyScalar(wave));
+                
+                const curve = new THREE.CatmullRomCurve3([innerPos, midPoint, outerPos]);
+                const curvePoints = curve.getPoints(isLowEnd ? 5 : 10);
+                
+                points.push(...curvePoints);
+            });
+            
+            connectionsMesh.geometry.dispose();
+            connectionsMesh.geometry = new THREE.BufferGeometry().setFromPoints(points);
+        }
+
+        const connectionsGeo = new THREE.BufferGeometry();
+        const connectionsMat = new THREE.LineBasicMaterial({ 
+            color: 0x88aaff, 
+            transparent: true, 
+            opacity: 0.9,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+        const connectionsMesh = new THREE.LineSegments(connectionsGeo, connectionsMat);
+        connectionGroup.add(connectionsMesh);
+
+        const connectionCIDData = [];
+        
+        const icosidodecahedronGeometry = new THREE.IcosahedronGeometry(baseIcosidodecahedronScale, 1);
+        const icoledoPositions = icosidodecahedronGeometry.attributes.position.array;
+        const icoledoVerts = [];
+        for (let i = 0; i < icoledoPositions.length; i += 3) {
+            icoledoVerts.push(new THREE.Vector3(icoledoPositions[i], icoledoPositions[i + 1], icoledoPositions[i + 2]));
+        }
+        
+        icoledoVerts.forEach((icoledoPos) => {
+            const distances = [];
+            outerVertices.forEach((outerPos) => {
+                const dist = icoledoPos.distanceTo(outerPos.clone().multiplyScalar(baseOuterScale));
+                distances.push({ dist: dist, icoledo: icoledoPos.clone(), outer: outerPos.clone() });
+            });
+            
+            distances.sort((x, y) => x.dist - y.dist);
+            
+            for (let k = 0; k < 2; k++) {
+                connectionCIDData.push({
+                    icoledo: distances[k].icoledo,
+                    outer: distances[k].outer
+                });
+            }
+        });
+
+        function updateConnectionsCID(elapsedTime) {
+            const points = [];
+            
+            connectionCIDData.forEach((conn, idx) => {
+                const icoledoPos = conn.icoledo.clone().multiplyScalar(appState.scales.icosidodecahedron);
+                const outerPos = conn.outer.clone().multiplyScalar(baseOuterScale * appState.scales.quasicrystal);
+                
+                const midPoint = icoledoPos.clone().lerp(outerPos, 0.5);
+                
+                const direction = outerPos.clone().sub(icoledoPos).normalize();
+                const up = new THREE.Vector3(0, 1, 0);
+                const perpendicular = new THREE.Vector3().crossVectors(direction, up).normalize();
+                
+                const wave = Math.sin(elapsedTime * 0.5 + idx * 0.3) * 0.2;
+                midPoint.add(perpendicular.multiplyScalar(wave));
+                
+                const curve = new THREE.CatmullRomCurve3([icoledoPos, midPoint, outerPos]);
+                const curvePoints = curve.getPoints(isLowEnd ? 5 : 10);
+                
+                points.push(...curvePoints);
+            });
+            
+            connectionsCIDMesh.geometry.dispose();
+            connectionsCIDMesh.geometry = new THREE.BufferGeometry().setFromPoints(points);
+        }
+
+        const connectionsCIDGeo = new THREE.BufferGeometry();
+        const connectionsCIDMat = new THREE.LineBasicMaterial({ 
+            color: 0xff88aa, 
+            transparent: true, 
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+        const connectionsCIDMesh = new THREE.LineSegments(connectionsCIDGeo, connectionsCIDMat);
+        connectionCIDGroup.add(connectionsCIDMesh);
+
+        const planeMeshes = [];
+        const planeGroups = {
+            sagittal: null,
+            frontal: null,
+            transverse: null
+        };
+        
+        function createLabanPlane(color, rotationX, rotationY, rotationZ, name) {
+            const planeGroup = new THREE.Group();
+            
+            const planeGeometry = new THREE.PlaneGeometry(basePlaneScale * 2, basePlaneScale * 2, planeSegments, planeSegments);
+            const planeMaterial = new THREE.MeshBasicMaterial({
+                color: color,
+                transparent: true,
+                opacity: 0.25,
+                side: THREE.DoubleSide,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending
+            });
+            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            plane.userData = { baseOpacity: 0.25, name: name };
+            planeGroup.add(plane);
+            planeMeshes.push(plane);
+            
+            const edgeGeometry = new THREE.EdgesGeometry(planeGeometry);
+            const edgeMaterial = new THREE.LineBasicMaterial({
+                color: color,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending
+            });
+            const edges = new THREE.LineSegments(edgeGeometry, edgeMaterial);
+            planeGroup.add(edges);
+            
+            planeGroup.rotation.x = rotationX;
+            planeGroup.rotation.y = rotationY;
+            planeGroup.rotation.z = rotationZ;
+            
+            return planeGroup;
+        }
+
+        const sagittalPlane = createLabanPlane(sagittalColor, 0, Math.PI / 2, 0, 'sagittal');
+        planeGroups.sagittal = sagittalPlane;
+        planesGroup.add(sagittalPlane);
+
+        const frontalPlane = createLabanPlane(frontalColor, 0, 0, 0, 'frontal');
+        planeGroups.frontal = frontalPlane;
+        planesGroup.add(frontalPlane);
+
+        const transversePlane = createLabanPlane(transverseColor, Math.PI / 2, 0, 0, 'transverse');
+        planeGroups.transverse = transversePlane;
+        planesGroup.add(transversePlane);
+
+        function createMobiusStrip() {
+            const mobiusGroup = new THREE.Group();
+            
+            const width = 0.8;
+            const radius = 0.6;
+            const segments = isLowEnd ? 32 : 64;
+            
+            const geometry = new THREE.BufferGeometry();
+            const positions = [];
+            const uvs = [];
+            const indices = [];
+            
+            for (let i = 0; i <= segments; i++) {
+                const theta = (i / segments) * Math.PI * 2;
+                const halfTheta = (i / segments) * Math.PI;
+                
+                const cosTheta = Math.cos(theta);
+                const sinTheta = Math.sin(theta);
+                const cosHalfTheta = Math.cos(halfTheta);
+                const sinHalfTheta = Math.sin(halfTheta);
+                
+                const cx = radius * cosTheta;
+                const cz = radius * sinTheta;
+                
+                const nx = cosTheta;
+                const nz = sinTheta;
+                
+                for (let j = -1; j <= 1; j += 2) {
+                    const w = j * width * 0.5 * cosHalfTheta;
+                    const h = j * width * 0.5 * sinHalfTheta;
+                    
+                    const x = cx + w * nx;
+                    const y = h;
+                    const z = cz + w * nz;
+                    
+                    positions.push(x, y, z);
+                    uvs.push(i / segments, (j + 1) / 2);
+                }
+            }
+            
+            for (let i = 0; i < segments; i++) {
+                const a = i * 2;
+                const b = i * 2 + 1;
+                const c = (i + 1) * 2;
+                const d = (i + 1) * 2 + 1;
+                
+                indices.push(a, b, c);
+                indices.push(b, d, c);
+            }
+            
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+            geometry.setIndex(indices);
+            geometry.computeVertexNormals();
+            
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xffffff,
+                emissive: 0xffffff,
+                emissiveIntensity: 0.3,
+                roughness: 0.3,
+                metalness: 0.8,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.9
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            mobiusGroup.add(mesh);
+            
+            if (!isLowEnd) {
+                const edgeGeo = new THREE.EdgesGeometry(geometry);
+                const edgeMat = new THREE.LineBasicMaterial({
+                    color: 0x88ccff,
+                    transparent: true,
+                    opacity: 0.8,
+                    blending: THREE.AdditiveBlending
+                });
+                const edges = new THREE.LineSegments(edgeGeo, edgeMat);
+                mobiusGroup.add(edges);
+            }
+            
+            return mobiusGroup;
+        }
+
+        const mobiusStrip = createMobiusStrip();
+        mobiusGroup.add(mobiusStrip);
+
+        const humanGroup = new THREE.Group();
+        
+        const basePoints = {
+            neck: new THREE.Vector3(0, 1.2, 0),
+            waist: new THREE.Vector3(0, -1.2, 0),
+            leftShoulder: new THREE.Vector3(-0.8, 1.0, 0),
+            rightShoulder: new THREE.Vector3(0.8, 1.0, 0),
+            leftHip: new THREE.Vector3(-0.4, -1.2, 0),
+            rightHip: new THREE.Vector3(0.4, -1.2, 0),
+            headCenter: new THREE.Vector3(0, 1.9, 0)
+        };
+
+        const limbLengths = {
+            leftArm: 1.0,
+            rightArm: 1.0,
+            leftLeg: 1.4,
+            rightLeg: 1.4
+        };
+
+        const skinColor = 0xffccaa;
+        const darkerSkin = 0xeebb99;
+
+        const torsoGeo = new THREE.CylinderGeometry(0.6, 0.6, 2.4, 8);
+        const torsoMat = new THREE.MeshStandardMaterial({ color: skinColor, emissive: skinColor, emissiveIntensity: 0.15 });
+        const torso = new THREE.Mesh(torsoGeo, torsoMat);
+        torso.position.set(0, 0, 0);
+        humanGroup.add(torso);
+
+        const headGeo = new THREE.SphereGeometry(0.5, 16, 16);
+        const headMat = new THREE.MeshStandardMaterial({ color: skinColor, emissive: skinColor, emissiveIntensity: 0.15 });
+        const head = new THREE.Mesh(headGeo, headMat);
+        head.position.copy(basePoints.headCenter);
+        humanGroup.add(head);
+
+        const eyeMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.2 });
+        const noseMat = new THREE.MeshStandardMaterial({ color: skinColor, roughness: 0.4 });
+        const mouthMat = new THREE.MeshStandardMaterial({ color: 0x883333, roughness: 0.3 });
+
+        const eyeGeo = new THREE.SphereGeometry(0.08, 8, 8);
+        const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+        leftEye.position.set(-0.15, 0.05, 0.45);
+        head.add(leftEye);
+
+        const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+        rightEye.position.set(0.15, 0.05, 0.45);
+        head.add(rightEye);
+
+        const noseGeo = new THREE.ConeGeometry(0.06, 0.12, 8);
+        const nose = new THREE.Mesh(noseGeo, noseMat);
+        nose.rotation.x = Math.PI / 2;
+        nose.position.set(0, -0.02, 0.48);
+        head.add(nose);
+
+        const mouthGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.2, 8);
+        const mouth = new THREE.Mesh(mouthGeo, mouthMat);
+        mouth.rotation.z = Math.PI / 2;
+        mouth.position.set(0, -0.2, 0.45);
+        head.add(mouth);
+
+        const limbMeshes = {};
+
+        function createLimb(start, end, color, name) {
+            const startVec = start.clone();
+            const endVec = end.clone();
+            const direction = new THREE.Vector3().subVectors(endVec, startVec);
+            const length = direction.length();
+            const cylinderGeo = new THREE.CylinderGeometry(0.15, 0.15, length, 6);
+            const material = new THREE.MeshStandardMaterial({ color: color, emissive: color, emissiveIntensity: 0.2 });
+            const cylinder = new THREE.Mesh(cylinderGeo, material);
+            
+            const mid = new THREE.Vector3().addVectors(startVec, endVec).multiplyScalar(0.5);
+            cylinder.position.copy(mid);
+            
+            cylinder.quaternion.setFromUnitVectors(
+                new THREE.Vector3(0, 1, 0),
+                direction.clone().normalize()
+            );
+            
+            return cylinder;
+        }
+
+        const icoDirs = innerVertices.map(v => v.clone().normalize());
+
+        function getLimbEnd(base, dirIndex, length) {
+            return base.clone().add(icoDirs[dirIndex].clone().multiplyScalar(length));
+        }
+
+        function initLimbs() {
+            limbMeshes.leftArm = createLimb(
+                basePoints.leftShoulder,
+                getLimbEnd(basePoints.leftShoulder, appState.kinesis.leftArm, limbLengths.leftArm),
+                skinColor
+            );
+            limbMeshes.rightArm = createLimb(
+                basePoints.rightShoulder,
+                getLimbEnd(basePoints.rightShoulder, appState.kinesis.rightArm, limbLengths.rightArm),
+                skinColor
+            );
+            limbMeshes.leftLeg = createLimb(
+                basePoints.leftHip,
+                getLimbEnd(basePoints.leftHip, appState.kinesis.leftLeg, limbLengths.leftLeg),
+                darkerSkin
+            );
+            limbMeshes.rightLeg = createLimb(
+                basePoints.rightHip,
+                getLimbEnd(basePoints.rightHip, appState.kinesis.rightLeg, limbLengths.rightLeg),
+                darkerSkin
+            );
+
+            for (let key in limbMeshes) {
+                humanGroup.add(limbMeshes[key]);
+            }
+        }
+        initLimbs();
+
+        const plexusGeo = new THREE.SphereGeometry(0.2, 8);
+        const plexusMat = new THREE.MeshStandardMaterial({ color: 0xffaa00, emissive: 0xffaa00, emissiveIntensity: 0.5 });
+        const plexusMarker = new THREE.Mesh(plexusGeo, plexusMat);
+        plexusMarker.position.set(0, 0, 0);
+        humanGroup.add(plexusMarker);
+
+        scene.add(humanGroup);
+
+        function updateLimb(limbName) {
+            if (!limbMeshes[limbName]) return;
+            
+            humanGroup.remove(limbMeshes[limbName]);
+            
+            let base, length, color;
+            if (limbName === 'leftArm') {
+                base = basePoints.leftShoulder;
+                length = limbLengths.leftArm;
+                color = skinColor;
+            } else if (limbName === 'rightArm') {
+                base = basePoints.rightShoulder;
+                length = limbLengths.rightArm;
+                color = skinColor;
+            } else if (limbName === 'leftLeg') {
+                base = basePoints.leftHip;
+                length = limbLengths.leftLeg;
+                color = darkerSkin;
+            } else if (limbName === 'rightLeg') {
+                base = basePoints.rightHip;
+                length = limbLengths.rightLeg;
+                color = darkerSkin;
+            } else return;
+            
+            const dirIndex = appState.kinesis[limbName];
+            const end = getLimbEnd(base, dirIndex, length);
+            
+            const newLimb = createLimb(base, end, color, limbName);
+            limbMeshes[limbName] = newLimb;
+            humanGroup.add(newLimb);
+        }
+
+        function updateAllLimbs() {
+            updateLimb('leftArm');
+            updateLimb('rightArm');
+            updateLimb('leftLeg');
+            updateLimb('rightLeg');
+        }
+
+        function applyHumanScale() {
+            humanGroup.scale.setScalar(appState.scales.human);
+        }
+
+        scene.add(outerAtomGroup);
+        scene.add(innerAtomGroup);
+        scene.add(cubeGroup);
+        scene.add(icosidodecahedronGroup);
+        scene.add(geodesicGroup);
+        scene.add(spheroidGroup);
+        scene.add(poincareGroup);
+        scene.add(outerEdgeGroup);
+        scene.add(innerEdgeGroup);
+        scene.add(cubeEdgeGroup);
+        scene.add(connectionGroup);
+        scene.add(connectionCIDGroup);
+        scene.add(planesGroup);
+        scene.add(mobiusGroup);
+
+        const particlesCount = isLowEnd ? 500 : 1000;
+        const posArray = new Float32Array(particlesCount * 3);
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 70;
+        }
+        const particlesGeo = new THREE.BufferGeometry();
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMat = new THREE.PointsMaterial({
+            size: 0.06,
+            color: 0x4d9eff,
+            transparent: true,
+            opacity: 0.55,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+        const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+        scene.add(particlesMesh);
+
+        if (!isLowEnd) {
+            const gridHelper = new THREE.GridHelper(50, 50, 0x333333, 0x111111);
+            gridHelper.position.y = -9;
+            scene.add(gridHelper);
+        }
+
+        function updateVisibility() {
+            outerAtomGroup.visible = appState.showQuasicrystal;
+            outerEdgeGroup.visible = appState.showQuasicrystal;
+            
+            innerAtomGroup.visible = appState.showIcosahedron;
+            innerEdgeGroup.visible = appState.showIcosahedron;
+            
+            cubeGroup.visible = appState.showCube;
+            cubeEdgeGroup.visible = appState.showCube;
+            
+            icosidodecahedronGroup.visible = appState.showIcosidodecahedron;
+            geodesicGroup.visible = appState.showGeodesic;
+            
+            spheroidGroup.visible = appState.showSpheroid;
+            poincareGroup.visible = appState.showPoincare;
+            
+            if (planeGroups.sagittal) planeGroups.sagittal.visible = appState.showPlaneSagittal && appState.showLabanPlanes;
+            if (planeGroups.frontal) planeGroups.frontal.visible = appState.showPlaneFrontal && appState.showLabanPlanes;
+            if (planeGroups.transverse) planeGroups.transverse.visible = appState.showPlaneTransverse && appState.showLabanPlanes;
+            
+            connectionGroup.visible = appState.showConnectionsIco && appState.showQuasicrystal && appState.showIcosahedron;
+            connectionCIDGroup.visible = appState.showConnectionsCID && appState.showQuasicrystal && appState.showIcosidodecahedron;
+            
+            mobiusGroup.visible = appState.showMobius;
+
+            humanGroup.visible = appState.showHuman;
+        }
+
+        function updateScale(key, delta) {
+            appState.scales[key] = Math.max(0.01, Math.min(2.0, appState.scales[key] + delta));
+            const valueEl = document.getElementById(`scale-${key}-value`);
+            if (valueEl) {
+                valueEl.textContent = Math.round(appState.scales[key] * 100) + '%';
+            }
+            applyScales();
+        }
+
+        function resetScales() {
+            appState.scales = { ...baseScales };
+            Object.keys(baseScales).forEach(key => {
+                const valueEl = document.getElementById(`scale-${key}-value`);
+                if (valueEl) {
+                    valueEl.textContent = '50%';
+                }
+            });
+            applyScales();
+        }
+
+        function applyCinesis() {
+            innerAtomGroup.rotation.set(
+                appState.cinesis.icosahedron.rot.x,
+                appState.cinesis.icosahedron.rot.y,
+                appState.cinesis.icosahedron.rot.z
+            );
+            innerEdgeGroup.rotation.copy(innerAtomGroup.rotation);
+
+            outerAtomGroup.rotation.set(
+                appState.cinesis.quasicrystal.rot.x,
+                appState.cinesis.quasicrystal.rot.y,
+                appState.cinesis.quasicrystal.rot.z
+            );
+            outerEdgeGroup.rotation.copy(outerAtomGroup.rotation);
+
+            cubeGroup.rotation.set(
+                appState.cinesis.cube.rot.x,
+                appState.cinesis.cube.rot.y,
+                appState.cinesis.cube.rot.z
+            );
+            cubeEdgeGroup.rotation.copy(cubeGroup.rotation);
+
+            icosidodecahedronGroup.rotation.set(
+                appState.cinesis.icosidodecahedron.rot.x,
+                appState.cinesis.icosidodecahedron.rot.y,
+                appState.cinesis.icosidodecahedron.rot.z
+            );
+
+            geodesicGroup.rotation.set(
+                appState.cinesis.geodesic.rot.x,
+                appState.cinesis.geodesic.rot.y,
+                appState.cinesis.geodesic.rot.z
+            );
+
+            spheroidGroup.rotation.set(
+                appState.cinesis.spheroid.rot.x,
+                appState.cinesis.spheroid.rot.y,
+                appState.cinesis.spheroid.rot.z
+            );
+
+            poincareGroup.rotation.set(
+                appState.cinesis.poincare.rot.x,
+                appState.cinesis.poincare.rot.y,
+                appState.cinesis.poincare.rot.z
+            );
+
+            if (planeGroups.sagittal) {
+                planeGroups.sagittal.rotation.set(
+                    appState.cinesis.sagittal.rot.x + 0,
+                    appState.cinesis.sagittal.rot.y + Math.PI / 2,
+                    appState.cinesis.sagittal.rot.z + 0
+                );
+            }
+
+            if (planeGroups.frontal) {
+                planeGroups.frontal.rotation.set(
+                    appState.cinesis.frontal.rot.x + 0,
+                    appState.cinesis.frontal.rot.y + 0,
+                    appState.cinesis.frontal.rot.z + 0
+                );
+            }
+
+            if (planeGroups.transverse) {
+                planeGroups.transverse.rotation.set(
+                    appState.cinesis.transverse.rot.x + Math.PI / 2,
+                    appState.cinesis.transverse.rot.y + 0,
+                    appState.cinesis.transverse.rot.z + 0
+                );
+            }
+        }
+
+        function applyScales() {
+            innerAtomGroup.children.forEach(atom => {
+                atom.position.copy(atom.userData.basePos).multiplyScalar(baseInnerScale * appState.scales.icosahedron);
+            });
+            updateInnerEdges();
+            
+            outerAtomGroup.children.forEach(atom => {
+                atom.position.copy(atom.userData.basePos).multiplyScalar(baseOuterScale * appState.scales.quasicrystal);
+            });
+            updateOuterEdges();
+            
+            cubeGroup.children.forEach(atom => {
+                atom.position.copy(atom.userData.basePos).multiplyScalar(baseCubeScale * appState.scales.cube);
+            });
+            updateCubeEdges();
+            
+            icosidodecahedronGroup.scale.setScalar(appState.scales.icosidodecahedron);
+            geodesicGroup.scale.setScalar(appState.scales.geodesic);
+            spheroidGroup.scale.setScalar(appState.scales.spheroid);
+            poincareGroup.scale.setScalar(appState.scales.poincare);
+            
+            planesGroup.scale.setScalar(appState.scales.planes);
+            mobiusGroup.scale.setScalar(appState.scales.mobius);
+            
+            applyHumanScale();
+            
+            if (appState.showConnectionsIco) {
+                updateConnections(0);
+            }
+
+            if (appState.showConnectionsCID) {
+                updateConnectionsCID(0);
+            }
+
+            applyCinesis();
+        }
+
+        function resetCinesis() {
+            appState.cinesis = JSON.parse(JSON.stringify(baseCinesis));
+            
+            const cinesisSliders = [
+                'ico', 'quasi', 'cube', 'icoledo', 'geo', 'sph', 'poi', 'sag', 'fro', 'tra'
+            ];
+            const axes = ['x', 'y', 'z'];
+            
+            cinesisSliders.forEach(prefix => {
+                axes.forEach(axis => {
+                    const slider = document.getElementById(`${prefix}-rot-${axis}`);
+                    const valueEl = document.getElementById(`${prefix}-rot-${axis}-val`);
+                    if (slider) {
+                        slider.value = 0;
+                    }
+                    if (valueEl) {
+                        valueEl.textContent = '0';
+                    }
+                });
+            });
+            
+            applyCinesis();
+        }
+
+        function resetAll() {
+            appState.scales = { ...baseScales };
+            Object.keys(baseScales).forEach(key => {
+                const valueEl = document.getElementById(`scale-${key}-value`);
+                if (valueEl) {
+                    valueEl.textContent = '50%';
+                }
+            });
+            
+            appState.velocity = 50;
+            const velocitySlider = document.getElementById('velocity-slider');
+            const velocityValue = document.getElementById('velocity-value');
+            if (velocitySlider) velocitySlider.value = 50;
+            if (velocityValue) velocityValue.textContent = '50%';
+            
+            appState.kinesis.leftArm = 1;
+            appState.kinesis.rightArm = 4;
+            appState.kinesis.leftLeg = 3;
+            appState.kinesis.rightLeg = 6;
+            appState.selectedExtremity = 'rightLeg';
+            updateAllLimbs();
+            updateKinesisButtons();
+            updateKinesisGridSelection();
+            
+            resetCinesis();
+            applyScales();
+        }
+
+        function updateKinesisGridSelection() {
+            document.querySelectorAll('.kinesis-dir-btn').forEach(b => b.classList.remove('selected'));
+            const currentExtremity = appState.selectedExtremity;
+            const currentIndex = appState.kinesis[currentExtremity];
+            const btn = document.querySelector(`.kinesis-dir-btn[data-dir="${currentIndex}"]`);
+            if (btn) {
+                btn.classList.add('selected');
+            }
+        }
+
+        function updateKinesisButtons() {
+            document.querySelectorAll('[id^="kinesis-extremity-"]').forEach(b => b.classList.remove('active'));
+            const btnId = `kinesis-extremity-${appState.selectedExtremity === 'leftArm' ? 'leftarm' : appState.selectedExtremity === 'rightArm' ? 'rightarm' : appState.selectedExtremity === 'leftLeg' ? 'leftleg' : 'rightleg'}`;
+            const btn = document.getElementById(btnId);
+            if (btn) {
+                btn.classList.add('active');
+            }
+        }
+
+        function makeDraggable(element) {
+            let isDragging = false;
+            let startX, startY, initialLeft, initialTop;
+
+            const onStart = (e) => {
+                if (e.target.closest('.control-btn') || e.target.closest('.scale-btn') || e.target.closest('.kinesis-dir-btn') || e.target.closest('.cinesis-slider') || e.target.closest('.velocity-slider')) return;
+                if (e.target.closest('.control-title') || e.target.closest('.legend-title')) return;
+                
+                isDragging = true;
+                element.classList.add('dragging');
+                
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                
+                const rect = element.getBoundingClientRect();
+                startX = clientX;
+                startY = clientY;
+                initialLeft = rect.left;
+                initialTop = rect.top;
+                
+                e.preventDefault();
+            };
+
+            const onMove = (e) => {
+                if (!isDragging) return;
+                
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                
+                const deltaX = clientX - startX;
+                const deltaY = clientY - startY;
+                
+                let newLeft = initialLeft + deltaX;
+                let newTop = initialTop + deltaY;
+                
+                const maxX = window.innerWidth - element.offsetWidth;
+                const maxY = window.innerHeight - element.offsetHeight;
+                
+                newLeft = Math.max(0, Math.min(newLeft, maxX));
+                newTop = Math.max(0, Math.min(newTop, maxY));
+                
+                element.style.left = newLeft + 'px';
+                element.style.top = newTop + 'px';
+                element.style.bottom = 'auto';
+                element.style.right = 'auto';
+            };
+
+            const onEnd = () => {
+                if (isDragging) {
+                    isDragging = false;
+                    element.classList.remove('dragging');
+                }
+            };
+
+            element.addEventListener('mousedown', onStart);
+            element.addEventListener('touchstart', onStart, { passive: false });
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('mouseup', onEnd);
+            document.addEventListener('touchend', onEnd);
+        }
+
+        const legend = document.getElementById('legend');
+        const controlPanel = document.getElementById('control-panel');
+        const controlTitle = document.getElementById('control-title');
+        const legendTitle = document.getElementById('legend-title');
+
+        makeDraggable(legend);
+        makeDraggable(controlPanel);
+
+        legendTitle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            legend.classList.toggle('collapsed');
+        });
+
+        controlTitle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            controlPanel.classList.toggle('collapsed');
+        });
+
+        document.getElementById('btn-pause').addEventListener('click', (e) => {
+            e.stopPropagation();
+            appState.isPlaying = !appState.isPlaying;
+            const btn = document.getElementById('btn-pause');
+            btn.classList.toggle('active', appState.isPlaying);
+            btn.classList.toggle('pause', !appState.isPlaying);
+            controls.autoRotate = appState.isPlaying;
+        });
+
+        const velocitySlider = document.getElementById('velocity-slider');
+        const velocityValue = document.getElementById('velocity-value');
+        
+        if (velocitySlider) {
+            velocitySlider.addEventListener('input', (e) => {
+                appState.velocity = parseInt(e.target.value);
+                if (velocityValue) {
+                    velocityValue.textContent = appState.velocity + '%';
+                }
+            });
+        }
+
+        function toggleButton(btnId, stateKey) {
+            const btn = document.getElementById(btnId);
+            if (btn) {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    appState[stateKey] = !appState[stateKey];
+                    btn.classList.toggle('active', appState[stateKey]);
+                    updateVisibility();
+                });
+            }
+        }
+
+        toggleButton('btn-icosahedron', 'showIcosahedron');
+        toggleButton('btn-quasicrystal', 'showQuasicrystal');
+        toggleButton('btn-cube', 'showCube');
+        toggleButton('btn-icosidodecahedron', 'showIcosidodecahedron');
+        toggleButton('btn-geodesic', 'showGeodesic');
+        toggleButton('btn-mobius', 'showMobius');
+        toggleButton('btn-connections-ico', 'showConnectionsIco');
+        toggleButton('btn-connections-cid', 'showConnectionsCID');
+        toggleButton('btn-spheroid', 'showSpheroid');
+        toggleButton('btn-poincare', 'showPoincare');
+        
+        toggleButton('btn-plane-sagittal', 'showPlaneSagittal');
+        toggleButton('btn-plane-frontal', 'showPlaneFrontal');
+        toggleButton('btn-plane-transverse', 'showPlaneTransverse');
+        
+        toggleButton('btn-human', 'showHuman');
+
+        document.querySelectorAll('.scale-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const scaleKey = btn.getAttribute('data-scale');
+                const action = btn.getAttribute('data-action');
+                const delta = action === 'up' ? 0.05 : -0.05;
+                updateScale(scaleKey, delta);
+            });
+        });
+
+        const scaleResetBtn = document.getElementById('btn-scale-reset');
+        if (scaleResetBtn) {
+            scaleResetBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                resetScales();
+            });
+        }
+
+        const resetBtn = document.getElementById('btn-reset');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                resetAll();
+            });
+        }
+
+        const cinesisConfig = [
+            { prefix: 'ico', key: 'icosahedron' },
+            { prefix: 'quasi', key: 'quasicrystal' },
+            { prefix: 'cube', key: 'cube' },
+            { prefix: 'icoledo', key: 'icosidodecahedron' },
+            { prefix: 'geo', key: 'geodesic' },
+            { prefix: 'sph', key: 'spheroid' },
+            { prefix: 'poi', key: 'poincare' },
+            { prefix: 'sag', key: 'sagittal' },
+            { prefix: 'fro', key: 'frontal' },
+            { prefix: 'tra', key: 'transverse' }
+        ];
+
+        cinesisConfig.forEach(config => {
+            ['x', 'y', 'z'].forEach(axis => {
+                const slider = document.getElementById(`${config.prefix}-rot-${axis}`);
+                const valueEl = document.getElementById(`${config.prefix}-rot-${axis}-val`);
+                
+                if (slider) {
+                    slider.addEventListener('input', (e) => {
+                        const value = parseFloat(e.target.value);
+                        appState.cinesis[config.key].rot[axis] = value;
+                        
+                        if (valueEl) {
+                            valueEl.textContent = value.toFixed(2);
+                        }
+                        
+                        applyCinesis();
+                    });
+                }
+            });
+        });
+
+        const cinesisResetBtn = document.getElementById('btn-cinesis-reset');
+        if (cinesisResetBtn) {
+            cinesisResetBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                resetCinesis();
+            });
+        }
+
+        const extremityBtns = {
+            leftarm: 'leftArm',
+            rightarm: 'rightArm',
+            leftleg: 'leftLeg',
+            rightleg: 'rightLeg'
+        };
+
+        document.querySelectorAll('[id^="kinesis-extremity-"]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('[id^="kinesis-extremity-"]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const id = btn.id.replace('kinesis-extremity-', '');
+                appState.selectedExtremity = extremityBtns[id];
+                updateKinesisGridSelection();
+            });
+        });
+
+        const dirGrid = document.getElementById('kinesis-dir-grid');
+        for (let i = 0; i < 12; i++) {
+            const btn = document.createElement('div');
+            btn.className = 'kinesis-dir-btn';
+            btn.textContent = i + 1;
+            btn.dataset.dir = i;
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const dirIndex = parseInt(e.target.dataset.dir);
+                const extremity = appState.selectedExtremity;
+                if (extremity) {
+                    appState.kinesis[extremity] = dirIndex;
+                    updateLimb(extremity);
+                    updateKinesisGridSelection();
+                }
+            });
+            dirGrid.appendChild(btn);
+        }
+
+        document.getElementById('kinesis-reset').addEventListener('click', (e) => {
+            e.stopPropagation();
+            appState.kinesis.leftArm = 1;
+            appState.kinesis.rightArm = 4;
+            appState.kinesis.leftLeg = 3;
+            appState.kinesis.rightLeg = 6;
+            appState.selectedExtremity = 'rightLeg';
+            updateAllLimbs();
+            updateKinesisButtons();
+            updateKinesisGridSelection();
+        });
+
+        const clock = new THREE.Clock();
+        let frameCount = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (isLowEnd) {
+                frameCount++;
+                if (frameCount % 2 !== 0) return;
+            }
+            
+            const elapsedTime = clock.getElapsedTime();
+            const velocityMultiplier = appState.velocity / 50;
+            
+            controls.update();
+            
+            if (appState.isPlaying) {
+                particlesMesh.rotation.y = elapsedTime * 0.01 * velocityMultiplier;
+                particlesMesh.rotation.x = elapsedTime * 0.005 * velocityMultiplier;
+
+                const slowTime = isLowEnd ? elapsedTime * 0.5 : elapsedTime;
+                const adjustedTime = slowTime * velocityMultiplier;
+                
+                outerAtomGroup.children.forEach((atom) => {
+                    const scalePulse = 1 + Math.sin(adjustedTime * 0.9 + atom.userData.offset) * 0.02;
+                    atom.scale.setScalar(scalePulse);
+                });
+
+                innerAtomGroup.children.forEach((atom) => {
+                    const scalePulse = 1 + Math.sin(adjustedTime * 1.2 + atom.userData.offset) * 0.025;
+                    atom.scale.setScalar(scalePulse);
+                });
+
+                cubeGroup.children.forEach((atom) => {
+                    const scalePulse = 1 + Math.sin(adjustedTime * 1.1 + atom.userData.offset) * 0.022;
+                    atom.scale.setScalar(scalePulse);
+                });
+
+                const icoRot = Math.sin(adjustedTime * 0.08) * 0.012;
+                innerAtomGroup.rotation.y += icoRot;
+                innerEdgeGroup.rotation.y += icoRot;
+                cubeGroup.rotation.y += -icoRot * 0.5;
+                cubeEdgeGroup.rotation.y += -icoRot * 0.5;
+
+                if (appState.showSpheroid) {
+                    spheroidGroup.rotation.y += 0.002 * velocityMultiplier;
+                }
+
+                if (appState.showPoincare) {
+                    poincareGroup.rotation.y += 0.003 * velocityMultiplier;
+                    poincareGroup.rotation.x += 0.001 * velocityMultiplier;
+                }
+
+                if (appState.showIcosidodecahedron) {
+                    icosidodecahedronGroup.rotation.y += 0.002 * velocityMultiplier;
+                    icosidodecahedronGroup.rotation.x += 0.001 * velocityMultiplier;
+                }
+
+                if (appState.showGeodesic) {
+                    geodesicGroup.rotation.y += 0.0015 * velocityMultiplier;
+                    geodesicGroup.rotation.x += 0.001 * velocityMultiplier;
+                }
+
+                if (appState.showConnectionsIco) {
+                    updateConnections(adjustedTime);
+                }
+
+                if (appState.showConnectionsCID) {
+                    updateConnectionsCID(adjustedTime);
+                }
+
+                if (appState.showMobius) {
+                    mobiusStrip.rotation.y = adjustedTime * 0.3;
+                    mobiusStrip.rotation.x = Math.sin(adjustedTime * 0.2) * 0.1;
+                    
+                    const mobiusPulse = 1 + Math.sin(adjustedTime * 1.5) * 0.05;
+                    mobiusStrip.scale.setScalar(appState.scales.mobius * mobiusPulse);
+                }
+
+                planesGroup.children.forEach((plane, index) => {
+                    if (plane.visible) {
+                        plane.rotation.z += 0.0008 * (index + 1) * velocityMultiplier;
+                        
+                        const planeMesh = plane.children[0];
+                        if (planeMesh && planeMesh.material) {
+                            planeMesh.material.opacity = planeMesh.userData.baseOpacity + 
+                                Math.sin(adjustedTime * 0.35 + index) * 0.04;
+                        }
+                        
+                        const planeEdges = plane.children[1];
+                        if (planeEdges && planeEdges.material) {
+                            planeEdges.material.opacity = 0.75 + Math.sin(adjustedTime * 0.5 + index) * 0.1;
+                        }
+                    }
+                });
+
+                const connectionPulse = 0.8 + Math.sin(adjustedTime * 0.5) * 0.1;
+                connectionsMat.opacity = connectionPulse;
+                connectionsCIDMat.opacity = connectionPulse;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }, 200);
+        });
+
+        window.onload = () => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 500);
+            }
+            updateVisibility();
+            applyScales();
+            updateKinesisButtons();
+            updateKinesisGridSelection();
+            animate();
+        };
+
+    </script>
 </body>
 </html>
