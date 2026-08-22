@@ -1,1140 +1,447 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Santa del Arte | San Arte - Experiencias Tierra mediante arte, ciencia, filosofía y psicología">
-<title>Santa del Arte | San Arte</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root {
---deep-forest: #1a2c1a;
---moss-green: #3a5a3a;
---sage: #8da98d;
---clay: #c7794a;
---ivory: #f8f5f0;
---charcoal: #2a2d3a;
---gold: #d4af37;
---cream: #e8d8c5;
---plum: #6b4c6b;
---shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.03);
---shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.08);
---shadow-deep: 0 25px 50px rgba(0, 0, 0, 0.15);
---shadow-sage: 0 0 25px rgba(141, 169, 141, 0.25);
---ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
---ease-in-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
---transition-base: all 0.5s var(--ease-in-out-expo);
---transition-fast: all 0.3s var(--ease-in-out-quad);
---space-2xs: 0.25rem;
---space-xs: 0.5rem;
---space-sm: 1rem;
---space-md: 1.5rem;
---space-lg: 2rem;
---space-xl: 3rem;
---space-2xl: 4rem;
---space-3xl: 6rem;
---text-xs: 0.75rem;
---text-sm: 0.875rem;
---text-base: 1rem;
---text-lg: 1.125rem;
---text-xl: 1.25rem;
---text-2xl: 1.5rem;
---text-3xl: 1.875rem;
---text-4xl: 2.25rem;
---text-5xl: 3rem;
---text-6xl: 4rem;
---text-7xl: 5rem;
---text-8xl: 6rem;
---border-radius-sm: 8px;
---border-radius-md: 16px;
---border-radius-lg: 24px;
---border-radius-xl: 32px;
---border-radius-full: 9999px;
---z-index-base: 1;
---z-index-nav: 100;
---z-index-modal: 500;
---z-index-overlay: 900;
---z-index-loader: 1000;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 100%; }
-body {
-font-family: 'Inter', 'Segoe UI', sans-serif;
-color: var(--charcoal);
-background-color: var(--ivory);
-line-height: 1.6;
-overflow-x: hidden;
-position: relative;
-}
-body::before {
-content: '';
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background:
-radial-gradient(circle at 10% 20%, rgba(26, 44, 26, 0.03) 0%, transparent 40%),
-radial-gradient(circle at 90% 80%, rgba(58, 90, 58, 0.03) 0%, transparent 40%);
-z-index: -2;
-}
-.brand-stamp {
-position: absolute;
-opacity: 0.02;
-z-index: -1;
-font-family: 'Syne', sans-serif;
-font-weight: 800;
-letter-spacing: 0.1em;
-white-space: nowrap;
-text-transform: uppercase;
-}
-.stamp-1 { top: 15%; right: 5%; font-size: 8vw; transform: rotate(15deg); color: var(--moss-green); }
-.stamp-2 { bottom: 20%; left: 8%; font-size: 7vw; transform: rotate(-10deg); color: var(--clay); }
-.container { width: min(95%, 1600px); margin: 0 auto; padding: 0 var(--space-sm); }
+¡Perfecto! Voy a crear una página de ventas completa con catálogo de productos, carrito de compras y checkout. Analizando tus imágenes, organizaré los productos por categorías.
 
-.navbar {
-position: fixed;
-top: 0; left: 0; right: 0;
-padding: var(--space-md) 0;
-z-index: var(--z-index-nav);
-transition: var(--transition-fast);
-backdrop-filter: blur(12px);
-background: rgba(248, 245, 240, 0.92);
-}
-.navbar.scrolled {
-padding: var(--space-sm) 0;
-background: rgba(248, 245, 240, 0.98);
-box-shadow: var(--shadow-soft);
-backdrop-filter: blur(8px);
-border-bottom: 1px solid var(--sage);
-}
-.nav-container {
-display: flex;
-justify-content: space-between;
-align-items: center;
-max-width: 1600px;
-margin: 0 auto;
-padding: 0 var(--space-md);
-}
-.brand-logo {
-display: flex;
-align-items: center;
-gap: var(--space-xs);
-text-decoration: none;
-font-family: 'Syne', sans-serif;
-font-weight: 700;
-font-size: 1.75rem;
-color: var(--deep-forest);
-transition: var(--transition-fast);
-position: relative;
-z-index: 101;
-}
-.brand-logo span {
-position: absolute;
-bottom: -18px;
-left: 50%;
-transform: translateX(-50%);
-font-size: 0.75rem;
-color: var(--moss-green);
-font-weight: 500;
-opacity: 0.9;
-text-transform: lowercase;
-letter-spacing: 1px;
-white-space: nowrap;
-}
-.brand-logo:hover { color: var(--gold); }
-.brand-icon { font-size: 2rem; color: var(--moss-green); }
-.nav-links { display: flex; gap: var(--space-lg); }
-.nav-link {
-text-decoration: none;
-color: var(--deep-forest);
-font-family: 'Syne', sans-serif;
-font-weight: 600;
-font-size: var(--text-lg);
-position: relative;
-padding: var(--space-2xs) 0;
-transition: var(--transition-fast);
-}
-.nav-link::after {
-content: '';
-position: absolute;
-bottom: 0; left: 0;
-width: 0; height: 2px;
-background: var(--gold);
-transition: var(--transition-fast);
-}
-.nav-link:hover, .nav-link.active { color: var(--moss-green); }
-.nav-link:hover::after, .nav-link.active::after { width: 100%; }
-.mobile-menu-btn {
-display: none;
-background: none;
-border: none;
-font-size: 1.5rem;
-color: var(--deep-forest);
-cursor: pointer;
-z-index: 101;
-}
+```html
+<!-- Agregar después de la sección de Business Model y antes de Contact -->
 
-.hero {
-min-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-position: relative;
-overflow: hidden;
-padding: 0;
-}
-.hero::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: linear-gradient(135deg, var(--deep-forest) 0%, #2a442a 100%);
-z-index: -1;
-}
-.hero-content {
-max-width: 1200px;
-margin: 0 auto;
-padding: var(--space-3xl) var(--space-md);
-text-align: center;
-position: relative;
-z-index: 2;
-width: 90%;
-}
-.rebirth-badge {
-display: inline-block;
-background: rgba(141, 169, 141, 0.15);
-backdrop-filter: blur(8px);
-color: var(--gold);
-padding: var(--space-xs) var(--space-md);
-border-radius: var(--border-radius-full);
-font-family: 'Syne', sans-serif;
-font-weight: 700;
-font-size: var(--text-lg);
-letter-spacing: 1px;
-margin-bottom: var(--space-lg);
-border: 1px solid rgba(141, 169, 141, 0.3);
-animation: pulse 3s infinite;
-}
-@keyframes pulse {
-0% { box-shadow: 0 0 0 0 rgba(141, 169, 141, 0.4); }
-70% { box-shadow: 0 0 0 12px rgba(141, 169, 141, 0); }
-100% { box-shadow: 0 0 0 0 rgba(141, 169, 141, 0); }
-}
-.hero-title {
-font-family: 'Syne', sans-serif;
-font-size: var(--text-8xl);
-font-weight: 800;
-margin-bottom: var(--space-xs);
-line-height: 0.9;
-text-transform: uppercase;
-letter-spacing: -0.03em;
-text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-background: linear-gradient(to right, var(--gold), var(--clay));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-}
-.hero-subtitle {
-font-family: 'Inter', sans-serif;
-font-size: var(--text-3xl);
-font-weight: 300;
-color: rgba(248, 245, 240, 0.85);
-margin-bottom: var(--space-xl);
-max-width: 800px;
-margin-left: auto; margin-right: auto;
-line-height: 1.4;
-}
-.hero-text {
-font-size: var(--text-xl);
-color: rgba(248, 245, 240, 0.75);
-margin-bottom: var(--space-2xl);
-max-width: 800px;
-margin-left: auto; margin-right: auto;
-line-height: 1.7;
-}
-.cta-container { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; }
-
-.btn {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: var(--space-xs);
-padding: var(--space-md) var(--space-xl);
-border-radius: var(--border-radius-full);
-text-decoration: none;
-font-family: 'Syne', sans-serif;
-font-weight: 700;
-font-size: var(--text-lg);
-letter-spacing: 0.5px;
-transition: var(--transition-base);
-border: none;
-cursor: pointer;
-position: relative;
-overflow: hidden;
-text-align: center;
-z-index: 1;
-}
-.btn::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: linear-gradient(45deg, var(--gold), var(--clay));
-z-index: -1;
-transition: var(--transition-base);
-}
-.btn-primary {
-background: transparent;
-color: var(--deep-forest);
-box-shadow: 0 4px 20px rgba(141, 169, 141, 0.3);
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(141, 169, 141, 0.5); }
-.btn-primary:hover::before { opacity: 1; }
-.btn-secondary {
-background: rgba(255, 255, 255, 0.15);
-color: var(--ivory);
-border: 1px solid rgba(255, 255, 255, 0.3);
-}
-.btn-secondary:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-3px); }
-.btn:active { transform: translateY(1px); }
-.btn i { font-size: 1.1em; }
-
-.section { padding: var(--space-3xl) 0; position: relative; }
-.section-header { text-align: center; max-width: 800px; margin: 0 auto var(--space-2xl); }
-.section-title {
-font-family: 'Syne', sans-serif;
-font-size: var(--text-5xl);
-font-weight: 800;
-margin-bottom: var(--space-xs);
-text-transform: uppercase;
-letter-spacing: -0.02em;
-background: linear-gradient(to right, var(--clay), var(--gold));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-}
-.section-subtitle {
-font-family: 'Inter', sans-serif;
-font-size: var(--text-2xl);
-font-weight: 300;
-color: var(--moss-green);
-margin-top: var(--space-sm);
-line-height: 1.5;
-}
-
-.pvu-section { background: var(--ivory); position: relative; overflow: hidden; }
-.pvu-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl); align-items: center; }
-.pvu-content {
-background: var(--ivory);
-backdrop-filter: blur(12px);
-border-radius: var(--border-radius-xl);
-padding: var(--space-2xl);
-box-shadow: var(--shadow-medium);
-border: 1px solid rgba(141, 169, 141, 0.1);
-position: relative;
-overflow: hidden;
-transition: var(--transition-base);
-}
-.pvu-content:hover { transform: translateY(-10px); box-shadow: var(--shadow-deep); }
-.pvu-content::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 5px;
-background: linear-gradient(90deg, var(--gold), var(--clay));
-}
-.pvu-icon { font-size: 3.5rem; color: var(--moss-green); margin-bottom: var(--space-md); display: flex; justify-content: center; }
-.pvu-title { font-family: 'Syne', sans-serif; font-size: var(--text-3xl); font-weight: 700; color: var(--deep-forest); margin-bottom: var(--space-sm); text-align: center; }
-.pvu-text { font-size: var(--text-lg); line-height: 1.8; color: var(--charcoal); margin-bottom: var(--space-lg); text-align: center; }
-.differentiators { display: flex; flex-wrap: wrap; gap: var(--space-sm); justify-content: center; }
-.differentiator {
-background: var(--sage); color: white;
-padding: var(--space-2xs) var(--space-md);
-border-radius: var(--border-radius-full);
-font-family: 'Syne', sans-serif;
-font-weight: 600;
-font-size: var(--text-sm);
-}
-
-.tabs-section { background: linear-gradient(to bottom, var(--ivory), var(--cream)); position: relative; }
-.tabs-wrapper { max-width: 1100px; margin: 0 auto; }
-.tab-nav { display: flex; justify-content: center; gap: var(--space-sm); margin-bottom: var(--space-xl); flex-wrap: wrap; }
-.tab-btn {
-background: transparent;
-border: 2px solid var(--sage);
-color: var(--deep-forest);
-padding: var(--space-sm) var(--space-xl);
-border-radius: var(--border-radius-full);
-font-family: 'Syne', sans-serif;
-font-weight: 700;
-font-size: var(--text-lg);
-cursor: pointer;
-transition: var(--transition-base);
-position: relative;
-overflow: hidden;
-}
-.tab-btn::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: var(--deep-forest);
-z-index: -1;
-transform: scaleX(0);
-transform-origin: right;
-transition: transform 0.4s var(--ease-in-out-expo);
-}
-.tab-btn:hover { border-color: var(--deep-forest); color: var(--ivory); }
-.tab-btn:hover::before { transform: scaleX(1); transform-origin: left; }
-.tab-btn.active { background: var(--deep-forest); color: var(--gold); border-color: var(--deep-forest); box-shadow: var(--shadow-medium); }
-.tab-btn.active::before { transform: scaleX(1); }
-.tab-content-wrapper { position: relative; min-height: 400px; }
-.tab-pane {
-display: none;
-opacity: 0;
-transform: translateY(20px);
-background: var(--ivory);
-border-radius: var(--border-radius-xl);
-padding: var(--space-2xl);
-box-shadow: var(--shadow-medium);
-border: 1px solid rgba(141, 169, 141, 0.15);
-}
-.tab-pane.active {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: var(--space-xl);
-align-items: center;
-opacity: 1;
-transform: translateY(0);
-animation: fadeInTab 0.6s var(--ease-in-out-expo) forwards;
-}
-@keyframes fadeInTab {
-from { opacity: 0; transform: translateY(20px); }
-to { opacity: 1; transform: translateY(0); }
-}
-.tab-pane-header { text-align: left; }
-.tab-pane-icon { font-size: 4rem; color: var(--clay); margin-bottom: var(--space-md); }
-.tab-pane-title { font-family: 'Syne', sans-serif; font-size: var(--text-4xl); font-weight: 800; color: var(--deep-forest); margin-bottom: var(--space-xs); }
-.tab-pane-subtitle { font-family: 'Inter', sans-serif; font-size: var(--text-xl); color: var(--moss-green); font-style: italic; margin-bottom: var(--space-lg); }
-.tab-pane-text { font-size: var(--text-base); color: var(--charcoal); line-height: 1.8; margin-bottom: var(--space-lg); }
-.tab-services-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-sm); }
-.tab-services-list li { display: flex; align-items: center; gap: var(--space-sm); font-size: var(--text-lg); color: var(--deep-forest); font-weight: 500; }
-.tab-services-list li i { color: var(--gold); font-size: 1.2rem; }
-.tab-pane-visual {
-display: flex;
-align-items: center;
-justify-content: center;
-background: linear-gradient(135deg, rgba(58, 90, 58, 0.05), rgba(199, 121, 74, 0.05));
-border-radius: var(--border-radius-lg);
-padding: var(--space-xl);
-min-height: 300px;
-position: relative;
-overflow: hidden;
-}
-.tab-pane-visual i { font-size: 8rem; color: var(--sage); opacity: 0.3; transition: var(--transition-base); }
-.tab-pane.active .tab-pane-visual i { opacity: 0.6; transform: scale(1.1); }
-
-/* Equipo profesional */
-.team-badge {
-display: inline-flex;
-align-items: center;
-gap: var(--space-xs);
-background: rgba(107, 76, 107, 0.1);
-color: var(--plum);
-padding: var(--space-2xs) var(--space-md);
-border-radius: var(--border-radius-full);
-font-family: 'Syne', sans-serif;
-font-weight: 600;
-font-size: var(--text-sm);
-margin-bottom: var(--space-md);
-border: 1px solid rgba(107, 76, 107, 0.25);
-}
-
-.business-model { background: linear-gradient(to bottom, var(--cream), var(--ivory)); position: relative; overflow: hidden; }
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-2xl); }
-.tier-card {
-background: var(--ivory);
-border-radius: var(--border-radius-xl);
-padding: var(--space-2xl);
-text-align: center;
-box-shadow: var(--shadow-medium);
-border: 1px solid rgba(141, 169, 141, 0.1);
-transition: var(--transition-base);
-position: relative;
-overflow: hidden;
-}
-.tier-card::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 5px;
-background: linear-gradient(90deg, var(--gold), var(--moss-green));
-}
-.tier-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-deep); }
-.tier-name { font-family: 'Syne', sans-serif; font-size: var(--text-3xl); margin-bottom: var(--space-sm); color: var(--deep-forest); }
-.tier-premium .tier-name { color: var(--gold); }
-.tier-accessible .tier-name { color: var(--sage); }
-.tier-freemium .tier-name { color: var(--moss-green); }
-.tier-description { font-size: var(--text-xl); color: var(--charcoal); margin-bottom: var(--space-lg); font-style: italic; }
-.tier-features { list-style: none; margin: var(--space-lg) 0; text-align: left; }
-.tier-features li { padding: var(--space-sm) 0; border-bottom: 1px solid var(--sage); display: flex; gap: var(--space-sm); }
-.tier-features li:last-child { border-bottom: none; }
-.tier-features li::before { content: '✓'; color: var(--moss-green); font-weight: bold; min-width: 1.5rem; }
-
-.contact-section { background: var(--ivory); padding: var(--space-3xl) 0 var(--space-xl); }
-.contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-2xl); margin-top: var(--space-xl); }
-.contact-card {
-background: var(--ivory);
-border-radius: var(--border-radius-xl);
-padding: var(--space-2xl);
-box-shadow: var(--shadow-medium);
-border: 1px solid rgba(141, 169, 141, 0.1);
-transition: var(--transition-base);
-}
-.contact-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-deep); border-color: rgba(58, 90, 58, 0.3); }
-.contact-title { font-family: 'Syne', sans-serif; font-size: var(--text-3xl); font-weight: 700; color: var(--deep-forest); margin-bottom: var(--space-lg); text-align: center; }
-.contact-info { text-align: center; }
-.contact-email {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: var(--space-sm);
-font-family: 'Syne', sans-serif;
-font-size: var(--text-xl);
-font-weight: 600;
-color: var(--moss-green);
-text-decoration: none;
-padding: var(--space-md);
-border-radius: var(--border-radius-lg);
-transition: var(--transition-fast);
-margin: var(--space-lg) 0;
-border: 1px solid rgba(58, 90, 58, 0.2);
-}
-.contact-email:hover { background: rgba(58, 90, 58, 0.05); transform: scale(1.03); }
-.social-links { display: flex; justify-content: center; gap: var(--space-md); margin-top: var(--space-xl); flex-wrap: wrap; }
-.social-link {
-width: 60px; height: 60px;
-border-radius: var(--border-radius-full);
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.5rem;
-text-decoration: none;
-transition: var(--transition-base);
-background: var(--cream);
-color: var(--deep-forest);
-box-shadow: var(--shadow-soft);
-}
-.social-link:hover { transform: translateY(-8px) scale(1.1); background: var(--moss-green); color: white; box-shadow: var(--shadow-sage); }
-.form-group { margin-bottom: var(--space-lg); }
-.form-label { display: block; margin-bottom: var(--space-2xs); font-family: 'Syne', sans-serif; font-weight: 600; color: var(--deep-forest); font-size: var(--text-lg); }
-.form-control {
-width: 100%;
-padding: var(--space-md);
-border: 2px solid var(--sage);
-border-radius: var(--border-radius-lg);
-font-family: 'Inter', sans-serif;
-font-size: var(--text-lg);
-transition: var(--transition-fast);
-background: var(--ivory);
-}
-.form-control:focus { outline: none; border-color: var(--moss-green); box-shadow: 0 0 0 3px rgba(58, 90, 58, 0.2); }
-textarea.form-control { min-height: 200px; resize: vertical; }
-.form-message { padding: var(--space-sm); margin-bottom: var(--space-md); font-size: var(--text-sm); border-radius: var(--border-radius-md); display: none; }
-.form-message.success-message { background: rgba(58, 90, 58, 0.1); color: var(--deep-forest); border: 1px solid var(--moss-green); }
-.form-message.error-message { background: rgba(199, 121, 74, 0.1); color: var(--clay); border: 1px solid var(--clay); }
-
-.cta-section {
-background: linear-gradient(135deg, var(--deep-forest), var(--moss-green));
-color: white;
-text-align: center;
-padding: var(--space-3xl) 0;
-position: relative;
-overflow: hidden;
-}
-.cta-section::before {
-content: '';
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background:
-radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 80%),
-radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.05) 0%, transparent 80%);
-z-index: -1;
-}
-.cta-content { max-width: 800px; margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
-.cta-title { font-family: 'Syne', sans-serif; font-size: var(--text-5xl); margin-bottom: var(--space-md); color: white; line-height: 1.3; }
-.cta-text { font-size: var(--text-2xl); margin-bottom: var(--space-2xl); line-height: 1.8; color: rgba(255, 255, 255, 0.9); font-weight: 300; font-style: italic; }
-
-footer { background: var(--deep-forest); color: rgba(255, 255, 255, 0.85); text-align: center; padding: var(--space-2xl) 0; font-family: 'Inter', sans-serif; font-size: var(--text-lg); }
-.footer-content { max-width: 800px; margin: 0 auto; padding: 0 var(--space-md); }
-.footer-logo { font-family: 'Syne', sans-serif; font-size: var(--text-2xl); font-weight: 700; color: var(--gold); margin-bottom: var(--space-md); display: block; text-decoration: none; }
-.copyright { margin-top: var(--space-sm); opacity: 0.7; font-size: var(--text-base); }
-
-.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-.fade-in.appear { opacity: 1; transform: translateY(0); }
-@keyframes rebirthFade { 0% { opacity: 0; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }
-
-.loader {
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: var(--deep-forest);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-z-index: var(--z-index-loader);
-transition: opacity 1s ease;
-}
-.loader-content { text-align: center; max-width: 90%; }
-.loader-icon { font-size: 4rem; color: var(--gold); margin-bottom: var(--space-lg); animation: spin 2s linear infinite; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.loader-text { font-family: 'Syne', sans-serif; font-size: var(--text-3xl); font-weight: 800; color: var(--ivory); text-transform: uppercase; letter-spacing: 3px; margin-bottom: var(--space-sm); }
-.loader-subtext { font-family: 'Inter', sans-serif; font-size: var(--text-lg); color: rgba(248, 245, 240, 0.8); font-weight: 300; letter-spacing: 1px; }
-.loader-progress { width: 300px; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: var(--border-radius-full); margin-top: var(--space-xl); overflow: hidden; }
-.progress-bar { height: 100%; width: 0%; background: var(--gold); border-radius: var(--border-radius-full); transition: width 0.4s ease; }
-
-@media (max-width: 768px) {
-:root {
---text-8xl: 4rem; --text-7xl: 3.5rem; --text-6xl: 3rem;
---text-5xl: 2.5rem; --text-4xl: 2rem; --text-3xl: 1.75rem;
---text-2xl: 1.5rem;
---space-3xl: 4rem; --space-2xl: 3rem; --space-xl: 2rem; --space-lg: 1.5rem;
-}
-.mobile-menu-btn { display: block; }
-.nav-links {
-display: none;
-position: fixed;
-top: 70px; left: 0; right: 0;
-background: var(--ivory);
-padding: var(--space-xl) 0;
-flex-direction: column;
-gap: var(--space-lg);
-align-items: center;
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-z-index: var(--z-index-modal);
-}
-.nav-links.active { display: flex; }
-.hero-title { font-size: var(--text-6xl); }
-.hero-subtitle { font-size: var(--text-2xl); }
-.section-title { font-size: var(--text-4xl); }
-.cta-container { flex-direction: column; align-items: center; }
-.btn { width: 100%; max-width: 350px; }
-.contact-container { grid-template-columns: 1fr; }
-.tab-pane.active { grid-template-columns: 1fr; }
-.tab-pane-visual { min-height: 200px; order: -1; }
-.tab-nav { gap: var(--space-xs); }
-.tab-btn { padding: var(--space-xs) var(--space-md); font-size: var(--text-base); }
-.brand-logo span { bottom: -15px; font-size: 0.7rem; }
-}
-@media (max-width: 480px) {
-:root {
---text-8xl: 3.5rem; --text-7xl: 3rem; --text-6xl: 2.5rem;
---text-5xl: 2rem; --text-4xl: 1.75rem;
---space-md: 1rem; --space-lg: 1.25rem; --space-xl: 1.5rem;
---space-2xl: 2rem; --space-3xl: 3rem;
-}
-.hero-content { padding: var(--space-xl) var(--space-sm); }
-.hero-title { font-size: var(--text-5xl); line-height: 1; }
-.section-title { font-size: var(--text-3xl); }
-.rebirth-badge { font-size: var(--text-base); padding: var(--space-2xs) var(--space-md); }
-.brand-logo span { display: none; }
-.contact-card { padding: var(--space-lg) !important; }
-}
-</style>
-</head>
-<body>
-<!-- Loading Screen -->
-<div class="loader" id="loader">
-<div class="loader-content">
-<div class="loader-icon"><i class="fas fa-seedling"></i></div>
-<div class="loader-text" id="loadingText">SANTA DEL ARTE</div>
-<div class="loader-subtext">Creando múltiples versos...</div>
-<div class="loader-progress">
-<div class="progress-bar" id="progressBar"></div>
-</div>
-</div>
+<section class="section shop-section" id="shop">
+<div class="container">
+<div class="section-header fade-in">
+<h2 class="section-title">Tienda Santa del Arte</h2>
+<p class="section-subtitle">Descubre nuestra colección curada de productos para el alma</p>
 </div>
 
-<div class="brand-stamp stamp-1">SANTA DEL ARTE</div>
-<div class="brand-stamp stamp-2">SAN ARTE</div>
-
-<nav class="navbar" id="navbar">
-<div class="nav-container">
-<a href="#" class="brand-logo">
-<i class="fas fa-seedling brand-icon"></i>
-Santa del Arte
-<span>san arte</span>
-</a>
-<div class="nav-links" id="navLinks">
-<a href="#pvu" class="nav-link">Propuesta</a>
-<a href="#ejes" class="nav-link">Ejes</a>
-<a href="#model" class="nav-link">Servicios</a>
-<a href="#contact" class="nav-link">Contacto</a>
-</div>
-<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú">
-<i class="fas fa-bars"></i>
+<!-- Filtros de categoría -->
+<div class="shop-filters fade-in">
+<button class="filter-btn active" data-filter="all">
+<i class="fas fa-th-large"></i> Todos
+</button>
+<button class="filter-btn" data-filter="libros">
+<i class="fas fa-book"></i> Libros & Arte
+</button>
+<button class="filter-btn" data-filter="papeleria">
+<i class="fas fa-pen-fancy"></i> Papelería
+</button>
+<button class="filter-btn" data-filter="harrypotter">
+<i class="fas fa-hat-wizard"></i> Harry Potter
+</button>
+<button class="filter-btn" data-filter="principito">
+<i class="fas fa-star"></i> El Principito
+</button>
+<button class="filter-btn" data-filter="tarot">
+<i class="fas fa-moon"></i> Tarot & Oráculo
+</button>
+<button class="filter-btn" data-filter="tecnologia">
+<i class="fas fa-tablet-alt"></i> Tecnología
 </button>
 </div>
-</nav>
 
-<section class="hero">
-<div class="hero-content">
-<div class="rebirth-badge">EXPERIENCIAS TIERRA</div>
-<h1 class="hero-title">Santa del Arte</h1>
-<div class="hero-subtitle">San Arte</div>
-<p class="hero-text">Suturando el mejor de los mundos posibles</p>
-<div class="cta-container">
-<a href="#ejes" class="btn btn-primary">
-<i class="fas fa-compass"></i> Explorar Ejes
-</a>
-<a href="#contact" class="btn btn-secondary">
-<i class="fas fa-envelope"></i> Contacto
-</a>
+<!-- Grid de productos -->
+<div class="products-grid" id="productsGrid">
+<!-- Los productos se generan dinámicamente con JavaScript -->
+</div>
+
+<!-- Mensaje sin productos -->
+<div class="no-products" id="noProducts" style="display: none;">
+<i class="fas fa-search"></i>
+<p>No se encontraron productos en esta categoría</p>
 </div>
 </div>
 </section>
 
-<section class="section pvu-section" id="pvu">
-<div class="container">
-<div class="section-header fade-in">
-<h2 class="section-title">Propuesta de Trabajo</h2>
-<p class="section-subtitle">Invención de experiencias comunitarias e individuales a través de la fusión entre arte, ciencia, filosofía y psicología</p>
+<!-- Carrito Sidebar -->
+<div class="cart-sidebar" id="cartSidebar">
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-content">
+<div class="cart-header">
+<h3><i class="fas fa-shopping-bag"></i> Tu Carrito</h3>
+<button class="cart-close" id="cartClose">
+<i class="fas fa-times"></i>
+</button>
 </div>
-<div class="pvu-container">
-<div class="pvu-content fade-in">
-<div class="pvu-icon"><i class="fas fa-flag"></i></div>
-<h3 class="pvu-title">MISIÓN</h3>
-<p class="pvu-text">Brindar servicios de sanación y autosanación multidisciplinaria de base artística, co-creados por profesionales con más de 10 años de experiencia, combinando rigor académico con prácticas innovadoras.</p>
-<div class="differentiators">
-<span class="differentiator">CUERPO TIERRA</span>
-<span class="differentiator">PROPIOCEPCIÓN</span>
-<span class="differentiator">RIGOR FLEXIBLE</span>
-<span class="differentiator">MULTIDISCIPLINARIEDAD</span>
+<div class="cart-items" id="cartItems">
+<!-- Items del carrito -->
+</div>
+<div class="cart-footer" id="cartFooter" style="display: none;">
+<div class="cart-total">
+<span>Total:</span>
+<span id="cartTotal">$0.00 MXN</span>
+</div>
+<button class="btn btn-primary" id="checkoutBtn" style="width: 100%;">
+<i class="fas fa-credit-card"></i> Proceder al Pago
+</button>
+<button class="btn btn-secondary" id="continueShopping" style="width: 100%; margin-top: 10px;">
+<i class="fas fa-arrow-left"></i> Seguir Comprando
+</button>
+</div>
+<div class="cart-empty" id="cartEmpty">
+<i class="fas fa-shopping-basket"></i>
+<p>Tu carrito está vacío</p>
+<span>Agrega productos para comenzar</span>
 </div>
 </div>
 </div>
-</div>
-</section>
 
-<section class="section tabs-section" id="ejes">
-<div class="container">
-<div class="section-header fade-in">
-<h2 class="section-title">Nuestros 4 Ejes</h2>
-<p class="section-subtitle">Explora las dimensiones de nuestra práctica Tierra</p>
-</div>
-<div class="tabs-wrapper fade-in">
-<div class="tab-nav">
-<button class="tab-btn active" data-tab="botica">
-<i class="fas fa-book-open"></i> Botica Literaria
+<!-- Modal de Producto -->
+<div class="product-modal" id="productModal">
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="modal-content">
+<button class="modal-close" id="modalClose">
+<i class="fas fa-times"></i>
 </button>
-<button class="tab-btn" data-tab="cuerpo">
-<i class="fas fa-hands"></i> Cuerpo
-</button>
-<button class="tab-btn" data-tab="arte">
-<i class="fas fa-music"></i> Arte
-</button>
-<button class="tab-btn" data-tab="psicologia">
-<i class="fas fa-brain"></i> Psicología
-</button>
-</div>
-<div class="tab-content-wrapper">
-<!-- Pestaña 1: Botica Literaria -->
-<div id="botica" class="tab-pane active">
-<div class="tab-pane-header">
-<div class="tab-pane-icon"><i class="fas fa-feather-alt"></i></div>
-<h3 class="tab-pane-title">Botica Literaria</h3>
-<p class="tab-pane-subtitle">Letras medicina</p>
-<p class="tab-pane-text">Un espacio donde la palabra se convierte en herramienta de sanación. Ofrecemos servicios de escritura terapéutica, objetos literarios personalizados y poesía como vehículo de transformación emocional, integrando la tradición con la innovación digital.</p>
-<ul class="tab-services-list">
-<li><i class="fas fa-check-circle"></i> Lazzeratura y escritura terapéutica</li>
-<li><i class="fas fa-check-circle"></i> Neo-Objetos Literarios y correspondencia poética</li>
-<li><i class="fas fa-check-circle"></i> Textos de Poder: rezos, conjuros y algoritmos</li>
-<li><i class="fas fa-check-circle"></i> Poemas Express</li>
-</ul>
-</div>
-<div class="tab-pane-visual"><i class="fas fa-scroll"></i></div>
-</div>
-<!-- Pestaña 2: Cuerpo -->
-<div id="cuerpo" class="tab-pane">
-<div class="tab-pane-header">
-<div class="tab-pane-icon"><i class="fas fa-spa"></i></div>
-<h3 class="tab-pane-title">Cuerpo</h3>
-<p class="tab-pane-subtitle">Háptica social y sanación física</p>
-<p class="tab-pane-text">Reconectamos con la sabiduría del cuerpo a través de terapias holísticas y sociales. Nuestro enfoque integra técnicas ancestrales y modernas para liberar tensiones, promover la nutrición consciente y facilitar la expresión corporal como acto de justicia y cuidado.</p>
-<ul class="tab-services-list">
-<li><i class="fas fa-check-circle"></i> Acupuntura láser y masaje terapéutico</li>
-<li><i class="fas fa-check-circle"></i> Danzaterapia y Danzastre</li>
-<li><i class="fas fa-check-circle"></i> Nutrición consciente con enfoque holístico</li>
-<li><i class="fas fa-check-circle"></i> Variaciones sobre el cuerpo y aceites esenciales</li>
-</ul>
-</div>
-<div class="tab-pane-visual"><i class="fas fa-hands-holding-circle"></i></div>
-</div>
-<!-- Pestaña 3: Arte -->
-<div id="arte" class="tab-pane">
-<div class="tab-pane-header">
-<div class="tab-pane-icon"><i class="fas fa-palette"></i></div>
-<h3 class="tab-pane-title">Arte</h3>
-<p class="tab-pane-subtitle">Otras técnicas de curación</p>
-<p class="tab-pane-text">El arte como puente para sanar heridas emocionales. Exploramos múltiples medios expresivos (fotografía, cine, danza, filosofía y poesía) para crear experiencias interactivas que fomenten la transformación personal y colectiva.</p>
-<ul class="tab-services-list">
-<li><i class="fas fa-check-circle"></i> Arte-sanación en múltiples medios</li>
-<li><i class="fas fa-check-circle"></i> Fractales sonoros y música transformadora</li>
-<li><i class="fas fa-check-circle"></i> Intersección de ciencia, filosofía y poesía</li>
-<li><i class="fas fa-check-circle"></i> Experiencias de arte interactivo y comunitario</li>
-</ul>
-</div>
-<div class="tab-pane-visual"><i class="fas fa-infinity"></i></div>
-</div>
-<!-- Pestaña 4: Psicología -->
-<div id="psicologia" class="tab-pane">
-<div class="tab-pane-header">
-<div class="tab-pane-icon"><i class="fas fa-brain"></i></div>
-<h3 class="tab-pane-title">Psicología</h3>
-<p class="tab-pane-subtitle">Acompañamiento profesional del alma</p>
-<div class="team-badge">
-<i class="fas fa-users"></i> Equipo: 1 experto y 2 expertas
-</div>
-<p class="tab-pane-text">Ofrecemos terapia psicológica y acompañamiento profesional con un enfoque integrador que combina la psicología clínica con prácticas contemplativas y artísticas. Nuestro equipo de tres profesionales (un psicólogo y dos psicólogas) brinda un espacio seguro, ético y libre de juicios para transitar procesos emocionales, fortalecer el bienestar mental y promover el autoconocimiento profundo.</p>
-<ul class="tab-services-list">
-<li><i class="fas fa-check-circle"></i> Terapia psicológica individual presencial y en línea</li>
-<li><i class="fas fa-check-circle"></i> Acompañamiento en procesos de duelo, ansiedad y depresión</li>
-<li><i class="fas fa-check-circle"></i> Terapia de pareja y orientación familiar</li>
-<li><i class="fas fa-check-circle"></i> Grupos de apoyo y círculos de palabra</li>
-<li><i class="fas fa-check-circle"></i> Evaluación psicológica y diagnóstico profesional</li>
-</ul>
-</div>
-<div class="tab-pane-visual"><i class="fas fa-brain"></i></div>
+<div class="modal-body" id="modalBody">
+<!-- Contenido dinámico -->
 </div>
 </div>
 </div>
-</div>
-</section>
 
-<section class="section business-model" id="model">
-<div class="container">
-<div class="section-header fade-in">
-<h2 class="section-title">Tipo de Servicios</h2>
-<p class="section-subtitle">Encuentra lo que mejor se adapte a tus necesidades, tenemos todo tipo de opciones</p>
+<!-- Modal de Checkout -->
+<div class="checkout-modal" id="checkoutModal">
+<div class="modal-overlay" id="checkoutOverlay"></div>
+<div class="checkout-content">
+<div class="checkout-header">
+<h3><i class="fas fa-lock"></i> Checkout Seguro</h3>
+<button class="modal-close" id="checkoutClose">
+<i class="fas fa-times"></i>
+</button>
 </div>
-<div class="pricing-grid">
-<div class="tier-card tier-premium fade-in">
-<h3 class="tier-name">Élite</h3>
-<p class="tier-description">Servicios especializados de alta valía</p>
-<ul class="tier-features">
-<li>Acupuntura láser con sonoterapia y aromaterapia</li>
-<li>Ciclos de terapias personalizadas</li>
-<li>Sesiones uno a uno con expertos multidisciplinarios</li>
-</ul>
-</div>
-<div class="tier-card tier-accessible fade-in">
-<h3 class="tier-name">Accesible</h3>
-<p class="tier-description">Paquetes con precios escalonados</p>
-<ul class="tier-features">
-<li>Masaje a domicilio</li>
-<li>Danzanación (Danzastre)</li>
-<li>Tutoriales de automasaje y bienestar</li>
-</ul>
-</div>
-<div class="tier-card tier-freemium fade-in">
-<h3 class="tier-name">Gratis</h3>
-<p class="tier-description">Contenido gratuito para la comunidad</p>
-<ul class="tier-features">
-<li>Meditaciones guiadas en YouTube</li>
-<li>Newsletter semanal y poemas diarios</li>
-<li>Acceso a comunidad digital y foros</li>
-</ul>
+<div class="checkout-body">
+<div class="checkout-summary">
+<h4>Resumen del Pedido</h4>
+<div id="checkoutItems"></div>
+<div class="checkout-total">
+<span>Total a Pagar:</span>
+<span id="checkoutTotal">$0.00 MXN</span>
 </div>
 </div>
-</div>
-</section>
-
-<section class="section contact-section" id="contact">
-<div class="container">
-<div class="section-header fade-in">
-<h2 class="section-title">Acércate</h2>
-<p class="section-subtitle">Únete a nuestra comunidad de transformación colectiva</p>
-</div>
-<div class="contact-container">
-<div class="contact-card contact-info fade-in">
-<h3 class="contact-title">Información de Contacto</h3>
-<a href="mailto:santadelarte@gmail.com" class="contact-email">
-<i class="fas fa-envelope"></i> santadelarte@gmail.com
-</a>
-<div class="social-links">
-<a href="https://youtube.com/@santadelarte" class="social-link" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-<a href="https://tiktok.com/@santa.del.arte" class="social-link" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-<a href="https://instagram.com/santadelarte" class="social-link" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-<a href="https://facebook.com/santadelarte" class="social-link" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-</div>
-<div style="margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: 1px solid var(--sage);">
-<p style="color: var(--moss-green); font-style: italic; line-height: 1.6; font-family: 'Inter', sans-serif; text-align: center;">
-<i class="fas fa-map-marker-alt"></i> Experiencias Tierra integrales en México
-</p>
-</div>
-</div>
-<div class="contact-card contact-form fade-in">
-<h3 class="contact-title">Envíanos un Mensaje</h3>
-<div id="formMessage" class="form-message"></div>
-<form id="contactForm">
+<form class="checkout-form" id="checkoutForm">
+<h4>Datos de Envío</h4>
 <div class="form-group">
-<label for="name" class="form-label">Nombre</label>
-<input type="text" id="name" class="form-control" required placeholder="Tu nombre">
+<label class="form-label">Nombre Completo</label>
+<input type="text" class="form-control" required placeholder="Tu nombre completo">
 </div>
 <div class="form-group">
-<label for="email" class="form-label">Email</label>
-<input type="email" id="email" class="form-control" required placeholder="Tu @email.com">
+<label class="form-label">Email</label>
+<input type="email" class="form-control" required placeholder="tu@email.com">
 </div>
 <div class="form-group">
-<label for="message" class="form-label">Mensaje</label>
-<textarea id="message" class="form-control" required placeholder="Tu mensaje" rows="4"></textarea>
+<label class="form-label">Teléfono</label>
+<input type="tel" class="form-control" required placeholder="55 1234 5678">
 </div>
-<input type="hidden" name="date" id="formDate">
-<button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--space-md);">
-<span id="buttonText"><i class="fas fa-paper-plane"></i> Enviar Mensaje</span>
+<div class="form-group">
+<label class="form-label">Dirección Completa</label>
+<textarea class="form-control" required placeholder="Calle, número, colonia, CP, ciudad" rows="3"></textarea>
+</div>
+<div class="form-group">
+<label class="form-label">Método de Pago</label>
+<select class="form-control" required>
+<option value="">Selecciona...</option>
+<option value="transfer">Transferencia Bancaria</option>
+<option value="card">Tarjeta de Crédito/Débito</option>
+<option value="paypal">PayPal</option>
+<option value="cash">Efectivo contra entrega</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">Notas adicionales</label>
+<textarea class="form-control" placeholder="Instrucciones especiales..." rows="2"></textarea>
+</div>
+<button type="submit" class="btn btn-primary" style="width: 100%;">
+<i class="fas fa-check"></i> Confirmar Pedido
 </button>
 </form>
 </div>
 </div>
 </div>
-</section>
 
-<section class="cta-section">
-<div class="container">
-<div class="cta-content fade-in">
-<h2 class="cta-title">No hay inspiración sin transpiración</h2>
-<p class="cta-text">Trabajamos para celebrar el tiempo del mundo con la fiesta más amorosa de todos los espacios</p>
-<a href="#contact" class="btn btn-secondary">
-<i class="fas fa-seedling"></i> Iniciar aventura
-</a>
+<!-- Botón flotante del carrito -->
+<div class="cart-float" id="cartFloat">
+<i class="fas fa-shopping-bag"></i>
+<span class="cart-count" id="cartCount">0</span>
 </div>
-</div>
-</section>
+```
 
-<footer>
-<div class="footer-content">
-<a href="#" class="footer-logo">Santa del Arte</a>
-<p class="copyright">&copy; <span id="year"></span> Santa del Arte. San Arte — Co-creando el mejor de los mundos posibles</p>
-<p style="margin-top: var(--space-sm); opacity: 0.7; font-size: var(--text-base);">
-santadelarte@gmail.com | Experiencias Tierra integrales trans, multi e interdisciplinarias
-</p>
-</div>
-</footer>
+Ahora agrego el CSS necesario:
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-simulateLoading();
-document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('formDate').value = new Date().toLocaleString('es-ES', {
-year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
-});
-
-if (typeof emailjs !== 'undefined') {
-emailjs.init({ publicKey: "Qdo4Mytu6qaKIJ-6y", blockHead: true });
+```css
+/* Estilos de la Tienda */
+.shop-section {
+background: linear-gradient(to bottom, var(--cream), var(--ivory));
+padding: var(--space-3xl) 0;
 }
 
-setupNavigation();
-setupTabs();
-setupContactForm();
-setupScrollAnimations();
-setupMobileMenu();
-addNaturalAnimations();
-});
-
-function simulateLoading() {
-const loader = document.getElementById('loader');
-const progressBar = document.getElementById('progressBar');
-const loadingText = document.getElementById('loadingText');
-let progress = 0;
-const interval = setInterval(() => {
-progress += Math.random() * 10;
-if (progress > 100) progress = 100;
-progressBar.style.width = progress + '%';
-if (progress > 80 && loadingText.textContent === 'SANTA DEL ARTE') {
-loadingText.textContent = 'SAN ARTE';
-}
-if (progress >= 100) {
-clearInterval(interval);
-setTimeout(() => {
-loader.style.opacity = '0';
-setTimeout(() => {
-loader.style.display = 'none';
-document.body.style.opacity = '0';
-setTimeout(() => {
-document.body.style.transition = 'opacity 1s ease';
-document.body.style.opacity = '1';
-}, 50);
-}, 300);
-}, 400);
-}
-}, 100);
+.shop-filters {
+display: flex;
+justify-content: center;
+gap: var(--space-sm);
+margin-bottom: var(--space-2xl);
+flex-wrap: wrap;
 }
 
-function setupNavigation() {
-const navbar = document.getElementById('navbar');
-const navLinks = document.querySelectorAll('.nav-link');
-
-window.addEventListener('scroll', function() {
-if (navbar) {
-if (window.scrollY > 50) {
-navbar.classList.add('scrolled');
-} else {
-navbar.classList.remove('scrolled');
-}
-}
-
-const sections = ['pvu', 'ejes', 'model', 'contact'];
-const scrollPosition = window.scrollY + 100;
-
-navLinks.forEach(link => link.classList.remove('active'));
-sections.forEach(sectionId => {
-const section = document.getElementById(sectionId);
-if (section) {
-const sectionTop = section.offsetTop;
-const sectionHeight = section.offsetHeight;
-if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-const activeLink = document.querySelector('.nav-link[href="#' + sectionId + '"]');
-if (activeLink) activeLink.classList.add('active');
-}
-}
-});
-});
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function(e) {
-e.preventDefault();
-const targetId = this.getAttribute('href');
-if (targetId === '#') return;
-const targetElement = document.querySelector(targetId);
-if (targetElement) {
-window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
-}
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinksContainer = document.getElementById('navLinks');
-if (navLinksContainer && navLinksContainer.classList.contains('active')) {
-navLinksContainer.classList.remove('active');
-if (mobileMenuBtn) mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-}
-});
-});
+.filter-btn {
+background: var(--ivory);
+border: 2px solid var(--sage);
+color: var(--deep-forest);
+padding: var(--space-sm) var(--space-lg);
+border-radius: var(--border-radius-full);
+font-family: 'Syne', sans-serif;
+font-weight: 600;
+font-size: var(--text-base);
+cursor: pointer;
+transition: var(--transition-fast);
+display: flex;
+align-items: center;
+gap: var(--space-xs);
 }
 
-function setupTabs() {
-const tabBtns = document.querySelectorAll('.tab-btn');
-const tabPanes = document.querySelectorAll('.tab-pane');
-
-tabBtns.forEach(btn => {
-btn.addEventListener('click', () => {
-tabBtns.forEach(b => b.classList.remove('active'));
-tabPanes.forEach(p => p.classList.remove('active'));
-btn.classList.add('active');
-const tabId = btn.getAttribute('data-tab');
-const activePane = document.getElementById(tabId);
-if (activePane) activePane.classList.add('active');
-});
-});
+.filter-btn:hover {
+background: var(--sage);
+color: white;
+transform: translateY(-2px);
 }
 
-function setupMobileMenu() {
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
-if (!mobileMenuBtn || !navLinks) return;
-
-mobileMenuBtn.addEventListener('click', function() {
-navLinks.classList.toggle('active');
-if (navLinks.classList.contains('active')) {
-mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-} else {
-mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-}
-});
+.filter-btn.active {
+background: var(--deep-forest);
+color: var(--gold);
+border-color: var(--deep-forest);
 }
 
-function setupScrollAnimations() {
-const fadeElements = document.querySelectorAll('.fade-in');
-const fadeObserver = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) entry.target.classList.add('appear');
-});
-}, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
-fadeElements.forEach(element => fadeObserver.observe(element));
+.products-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: var(--space-xl);
 }
 
-function setupContactForm() {
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
-const button = contactForm.querySelector('.btn');
-const buttonText = document.getElementById('buttonText');
-
-contactForm.addEventListener('submit', function(e) {
-e.preventDefault();
-formMessage.style.display = 'none';
-formMessage.className = 'form-message';
-
-const name = document.getElementById('name').value.trim();
-const email = document.getElementById('email').value.trim();
-const message = document.getElementById('message').value.trim();
-
-if (!name || name.length < 2) {
-showFormMessage('Por favor ingresa un nombre válido (mínimo 2 caracteres)', 'error');
-return;
-}
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-if (!email || !emailRegex.test(email)) {
-showFormMessage('Por favor ingresa un email válido', 'error');
-return;
-}
-if (!message || message.length < 10) {
-showFormMessage('El mensaje debe tener al menos 10 caracteres', 'error');
-return;
+.product-card {
+background: var(--ivory);
+border-radius: var(--border-radius-lg);
+overflow: hidden;
+box-shadow: var(--shadow-medium);
+transition: var(--transition-base);
+position: relative;
+border: 1px solid rgba(141, 169, 141, 0.1);
 }
 
-button.disabled = true;
-buttonText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-
-emailjs.send("service_qmc0za3", "template_jjkwjfb", {
-from_name: name,
-from_email: email,
-message: message,
-date: new Date().toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-to_email: "santadelarte@gmail.com"
-})
-.then(function() {
-showFormMessage('¡Gracias por tu mensaje! Hemos recibido tu consulta y te responderemos pronto.', 'success');
-contactForm.reset();
-setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
-})
-.catch(function(error) {
-console.error('Error:', error);
-showFormMessage('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo o contacta directamente a santadelarte@gmail.com', 'error');
-})
-.finally(() => {
-button.disabled = false;
-buttonText.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Mensaje';
-});
-});
-
-function showFormMessage(text, type) {
-formMessage.textContent = text;
-formMessage.className = 'form-message ' + (type === 'success' ? 'success-message' : 'error-message');
-formMessage.style.display = 'block';
-if (type === 'error') {
-formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-}
+.product-card:hover {
+transform: translateY(-8px);
+box-shadow: var(--shadow-deep);
 }
 
-function addNaturalAnimations() {
-setTimeout(() => {
-const heroContent = document.querySelector('.hero-content');
-if (heroContent) heroContent.style.animation = 'rebirthFade 1.2s ease-out forwards';
-}, 800);
+.product-badge {
+position: absolute;
+top: var(--space-sm);
+left: var(--space-sm);
+background: var(--gold);
+color: var(--deep-forest);
+padding: var(--space-2xs) var(--space-sm);
+border-radius: var(--border-radius-sm);
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: var(--text-xs);
+text-transform: uppercase;
+z-index: 2;
 }
-</script>
-</body>
-</html>
+
+.product-badge.new {
+background: var(--moss-green);
+color: white;
+}
+
+.product-badge.sale {
+background: var(--clay);
+color: white;
+}
+
+.product-image {
+width: 100%;
+height: 280px;
+object-fit: cover;
+background: linear-gradient(135deg, var(--sage), var(--moss-green));
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 4rem;
+color: rgba(255,255,255,0.3);
+position: relative;
+overflow: hidden;
+}
+
+.product-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+transform: scale(1.05);
+}
+
+.product-actions {
+position: absolute;
+bottom: -50px;
+left: 0;
+right: 0;
+display: flex;
+justify-content: center;
+gap: var(--space-sm);
+padding: var(--space-sm);
+background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+transition: bottom 0.3s ease;
+}
+
+.product-card:hover .product-actions {
+bottom: 0;
+}
+
+.action-btn {
+width: 45px;
+height: 45px;
+border-radius: var(--border-radius-full);
+background: white;
+border: none;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+transition: var(--transition-fast);
+color: var(--deep-forest);
+font-size: 1.1rem;
+}
+
+.action-btn:hover {
+background: var(--gold);
+transform: scale(1.1);
+}
+
+.product-info {
+padding: var(--space-lg);
+}
+
+.product-category {
+color: var(--moss-green);
+font-family: 'Syne', sans-serif;
+font-size: var(--text-xs);
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: var(--space-2xs);
+}
+
+.product-title {
+font-family: 'Syne', sans-serif;
+font-size: var(--text-xl);
+font-weight: 700;
+color: var(--deep-forest);
+margin-bottom: var(--space-xs);
+line-height: 1.3;
+}
+
+.product-description {
+font-size: var(--text-sm);
+color: var(--charcoal);
+line-height: 1.5;
+margin-bottom: var(--space-md);
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+}
+
+.product-footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.product-price {
+font-family: 'Syne', sans-serif;
+font-size: var(--text-2xl);
+font-weight: 800;
+color: var(--clay);
+}
+
+.product-price .original {
+font-size: var(--text-lg);
+color: var(--charcoal);
+text-decoration: line-through;
+margin-left: var(--space-xs);
+opacity: 0.6;
+}
+
+.add-to-cart {
+background: var(--deep-forest);
+color: var(--gold);
+border: none;
+padding: var(--space-sm) var(--space-lg);
+border-radius: var(--border-radius-full);
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+cursor: pointer;
+transition: var(--transition-fast);
+display: flex;
+align-items: center;
+gap: var(--space-xs);
+}
+
+.add-to-cart:hover {
+background: var(--gold);
+color: var(--deep-forest);
+transform: scale(1.05);
+}
+
+/* Carrito Sidebar */
+.cart-sidebar {
+position: fixed;
+top: 0;
+right: -450px;
+width: 450px;
+max-width: 100%;
+height: 100vh;
+background: var(--ivory);
+box-shadow: var(--shadow-deep);
+z-index: 1001;
+transition: right 0.4s var(--ease-in-out-expo);
+display: flex;
+flex-direction: column;
+}
+
+.cart-sidebar.open {
+right: 0;
+}
+
+.cart-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.5);
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+
+.cart-sidebar.open .cart-overlay {
+opacity: 1;
+visibility: visible;
+}
+
+.cart-content {
+display: flex;
+flex-direction: column;
+height: 100%;
+}
+
+.cart-header {
+padding: var(--space-xl);
+border-bottom: 2px solid var(--sage);
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: var(--deep-forest);
+color: var(--gold);
+}
+
+.cart-header h3 {
+font-family: 'Sy
